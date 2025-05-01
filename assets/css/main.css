@@ -2943,7 +2943,7 @@ input.main-search-input::placeholder {
 }
 .hero-2 .hero-content p {
   font-weight: 600;
-  color: var(--theme2);
+  color: var(--theme3);
   text-transform: uppercase;
   font-size: 20px;
 }
