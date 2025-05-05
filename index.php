@@ -591,20 +591,23 @@
 
  <!-- Login Modal
     =========================== -->
+    <form action="/controllers/users/login.php" method="POST">
+
     <div id="login-modal" class="modal fade oxyy-login-register" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content border-0">
             <div class="modal-body p-0">
-              <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close btn-close-dark position-absolute top-0 end-0 m-2 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
               <div class="row g-0"> 
                 <!-- Welcome Text
                 ====================== -->
-                <div class="col-lg-5 bg-primary rounded-start">
+                <div class="col-lg-5 d-none d-lg-block bg-primary rounded-start">
                   <div class="row g-0 h-100">
                     <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
-                      <h3 class="text-white mt-5 mb-4">Login</h3>
+                      <h3 class="text-white mt-5 mb-4">Iniciar Sesion</h3>
                       <p class="text-4 text-light lh-base mb-4">Mantente conectado con platanea y disfruta de sus delicias.</p>
-                      <div class="mt-auto mb-4"><img class="img-fluid" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy"></div>
+                      <div class="mt-auto mb-4"><img class="img-fluid w-100 w-sm-40 w-md-50" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -616,32 +619,32 @@
                   <div class="container my-auto py-5">
                     <div class="row">
                       <div class="col-11 col-lg-10 mx-auto">
-                        <h3 class="text-center text-4 mb-4">Login with Social Profile</h3>
+                        <h3 class="text-center text-4 mb-4">Iniciar Sesion</h3>
                         <div class="d-flex flex-column align-items-center mb-3">
                           
                         </div>
                         
-                        <form id="loginForm" class="form-border" method="post">
+                        
                           <div class="mb-3">
-                            <input type="email" class="form-control border-2" id="emailAddress" required placeholder="Enter Email">
+                            <input type="email" class="form-control border-2" id="emailAddress" name="correoUsuario" required placeholder="Ingresa tu correo">
                           </div>
                           <div class="mb-3">
-                            <input type="password" class="form-control border-2" id="loginPassword" required placeholder="Enter Password">
+                            <input type="password" class="form-control border-2" id="loginPassword" name="contrasenaUsuario" required placeholder="Ingresa tu contraseña">
                           </div>
                           <div class="row my-4">
                             <div class="col">
                               <div class="form-check">
                                 <input id="remember-me" name="remember" class="form-check-input" type="checkbox">
-                                <label class="form-check-label text-2" for="remember-me">Remember Me</label>
+                                <label class="form-check-label text-2" for="remember-me">Recordarme</label>
                               </div>
                             </div>
-                            <div class="col text-2 text-end"><a href="" data-bs-toggle="modal" data-bs-target="#forgot-password-modal" data-bs-dismiss="modal">Forgot Password ?</a></div>
+                            <div class="col text-2 text-end"><a href="" data-bs-toggle="modal" data-bs-target="#forgot-password-modal" data-bs-dismiss="modal">Olvidaste tu contraseña ?</a></div>
                           </div>
                           <div class="d-grid my-4">
-                        <button class="btn btn-primary" type="submit">Login</button>
+                        <button class="btn btn-primary" type="submit">Iniciar Sesion</button>
                         </div>
-                        </form>
-                        <p class="text-2 text-center mb-0">New to Oxyy? <a href="" data-bs-toggle="modal" data-bs-target="#register-modal" data-bs-dismiss="modal">Create an account</a></p>
+                        
+                        <p class="text-2 text-center mb-0">Eres nuevo? <a href="" data-bs-toggle="modal" data-bs-target="#register-modal" data-bs-dismiss="modal">Crear una cuenta</a></p>
                       </div>
                     </div>
                   </div>
@@ -652,57 +655,64 @@
           </div>
         </div>
       </div>
+      </form>
       <!-- Login Modal End --> 
 
 
-        <!-- Olvide contraseña modal -->
+       <!-- Olvide contraseña modal -->
          
-    <div id="forgot-password-modal" class="modal fade oxyy-login-register" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-          <div class="modal-content border-0">
-            <div class="modal-body p-0">
-              <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
-              <div class="row g-0"> 
-                <!-- Welcome Text
-                ====================== -->
-                <div class="col-lg-5 bg-primary rounded-start">
-                  <div class="row g-0 h-100">
-                    <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
-                      <h3 class="text-white mt-5 mb-4">Login</h3>
-                      <p class="text-4 text-light lh-base mb-4">To keep connected with us please login with your personal info.</p>
-                      <div class="mt-auto mb-4"><img class="img-fluid" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy"></div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Welcome Text End --> 
-                
-                <!-- Forgot Form
-                ====================== -->
-                <div class="col-lg-7 d-flex align-items-center bg-white rounded-end">
-                  <div class="container my-auto py-5">
-                    <div class="row">
-                      <div class="col-11 col-lg-10 mx-auto">
-                        <h3 class="text-center text-6 mb-4">Forgot your password?</h3>
-                        <p class="text-center text-muted">Enter your Email or Mobile and we’ll help you reset your password.</p>
-                        <form id="forgotForm" class="form-border" method="post">
-                          <div class="mb-3">
-                            <input type="text" class="form-control border-2" id="emailAddress" required placeholder="Enter Email or Mobile Number">
+       <div id="forgot-password-modal" class="modal fade oxyy-login-register" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-content border-0">
+                <div class="modal-body p-0">
+                  <button type="button" class="btn-close btn-close-dark position-absolute top-0 end-0 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <div class="row g-0"> 
+          
+                    <!-- Welcome Text (oculto en móvil y tablets) -->
+                    <div class="col-lg-5 d-none d-lg-block bg-primary rounded-start">
+                      <div class="row g-0 h-100">
+                        <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
+                          <h3 class="text-white mt-5 mb-4">Login</h3>
+                          <p class="text-4 text-light lh-base mb-4">To keep connected with us please login with your personal info.</p>
+                          <div class="mt-auto mb-4">
+                            <img class="img-fluid w-100 w-sm-30 w-md-50" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy">
                           </div>
-                          <div class="d-grid my-4">
-                              <button class="btn btn-primary" type="submit">Continue</button>
-                          </div>
-                        </form>
-                        <p class="text-2 text-center mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#login-modal" data-bs-dismiss="modal">Return to Log In</a></p>
+                        </div>
                       </div>
                     </div>
+                    <!-- Welcome Text End -->
+          
+                    <!-- Forgot Form -->
+                    <div class="col-12 col-lg-7 d-flex align-items-center bg-white rounded-end">
+                      <div class="container my-auto py-5">
+                        <div class="row">
+                          <div class="col-11 col-lg-10 mx-auto">
+                            <h3 class="text-center text-6 mb-4">Forgot your password?</h3>
+                            <p class="text-center text-muted">Enter your Email or Mobile and we’ll help you reset your password.</p>
+                            <form id="forgotForm" class="form-border" method="post">
+                              <div class="mb-3">
+                                <input type="text" class="form-control border-2" id="emailAddress" required placeholder="Enter Email or Mobile Number">
+                              </div>
+                              <div class="d-grid my-4">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                              </div>
+                            </form>
+                            <p class="text-2 text-center mb-0">
+                              <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" data-bs-dismiss="modal">Return to Log In</a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Forgot Form End --> 
+          
                   </div>
                 </div>
-                <!-- Forgot Form End --> 
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          <!-- Forgot Modal End -->
+          
       <!-- Forgot Modal End -->
 
 
@@ -712,16 +722,17 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content border-0">
             <div class="modal-body p-0">
-              <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close btn-close-dark position-absolute top-0 end-0 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
               <div class="row g-0"> 
                 <!-- Welcome Text
                 ====================== -->
-                <div class="col-lg-5 bg-primary rounded-start">
+                <div class="col-lg-5 d-none d-lg-block bg-primary rounded-start">
                   <div class="row g-0 h-100">
                     <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
                       <h3 class="text-white mt-5 mb-4">Register</h3>
                       <p class="text-4 text-light lh-base mb-4">Enter your personal details and start journey with us.</p>
-                      <div class="mt-auto mb-4"><img class="img-fluid" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy"></div>
+                      <div class="mt-auto mb-4"><img class="img-fluid w-100 w-sm-40 w-md-50" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -768,6 +779,8 @@
         </div>
       </div>
       <!-- Register Modal End -->
+
+
 
 
 
