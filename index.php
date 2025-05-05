@@ -1,3 +1,17 @@
+<?php
+    session_start();
+
+
+
+
+       
+
+
+?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -591,8 +605,7 @@
 
  <!-- Login Modal
     =========================== -->
-    <form action="/controllers/users/login.php" method="POST">
-
+    
     <div id="login-modal" class="modal fade oxyy-login-register" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content border-0">
@@ -624,7 +637,8 @@
                           
                         </div>
                         
-                        
+                <!-- ACA VA EL FORM LOGING --> 
+                        <form action="controllers/users/login.php" method="POST">
                           <div class="mb-3">
                             <input type="email" class="form-control border-2" id="emailAddress" name="correoUsuario" required placeholder="Ingresa tu correo">
                           </div>
@@ -634,7 +648,7 @@
                           <div class="row my-4">
                             <div class="col">
                               <div class="form-check">
-                                <input id="remember-me" name="remember" class="form-check-input" type="checkbox">
+                                <input id="remember-me" name="recuerdame" class="form-check-input" type="checkbox">
                                 <label class="form-check-label text-2" for="remember-me">Recordarme</label>
                               </div>
                             </div>
@@ -642,6 +656,9 @@
                           </div>
                           <div class="d-grid my-4">
                         <button class="btn btn-primary" type="submit">Iniciar Sesion</button>
+                        </form>
+                <!-- End EL FORM LOGING --> 
+
                         </div>
                         
                         <p class="text-2 text-center mb-0">Eres nuevo? <a href="" data-bs-toggle="modal" data-bs-target="#register-modal" data-bs-dismiss="modal">Crear una cuenta</a></p>
@@ -655,7 +672,7 @@
           </div>
         </div>
       </div>
-      </form>
+      
       <!-- Login Modal End --> 
 
 
@@ -672,8 +689,8 @@
                     <div class="col-lg-5 d-none d-lg-block bg-primary rounded-start">
                       <div class="row g-0 h-100">
                         <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
-                          <h3 class="text-white mt-5 mb-4">Login</h3>
-                          <p class="text-4 text-light lh-base mb-4">To keep connected with us please login with your personal info.</p>
+                          <h3 class="text-white mt-5 mb-4">Recuperar contraseña</h3>
+                          <p class="text-4 text-light lh-base mb-4">Aca podras recuperar tu contraseña atravez de tu correo.</p>
                           <div class="mt-auto mb-4">
                             <img class="img-fluid w-100 w-sm-30 w-md-50" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy">
                           </div>
@@ -687,18 +704,25 @@
                       <div class="container my-auto py-5">
                         <div class="row">
                           <div class="col-11 col-lg-10 mx-auto">
-                            <h3 class="text-center text-6 mb-4">Forgot your password?</h3>
-                            <p class="text-center text-muted">Enter your Email or Mobile and we’ll help you reset your password.</p>
-                            <form id="forgotForm" class="form-border" method="post">
+                            <h3 class="text-center text-6 mb-4">Olvidaste tu contraseña?</h3>
+                            <p class="text-center text-muted">Ingresa tu email y actualiza tu contraseña.</p>
+
+                        <!-- Inicio form olvide --> 
+
+                            <form id="forgotForm" class="form-border" action="controllers/users/recuperarContraseña.php" method="POST">
                               <div class="mb-3">
-                                <input type="text" class="form-control border-2" id="emailAddress" required placeholder="Enter Email or Mobile Number">
+                                <input type="email" class="form-control border-2" id="emailAddress" required placeholder="Ingresa tu correo electronico">
                               </div>
                               <div class="d-grid my-4">
-                                <button class="btn btn-primary" type="submit">Continue</button>
+                                <button class="btn btn-primary" type="submit">Enviar</button>
                               </div>
                             </form>
+
+
+                        <!-- Inicio form olvide --> 
+
                             <p class="text-2 text-center mb-0">
-                              <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" data-bs-dismiss="modal">Return to Log In</a>
+                              <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" data-bs-dismiss="modal">Regresar</a>
                             </p>
                           </div>
                         </div>
@@ -729,8 +753,8 @@
                 <div class="col-lg-5 d-none d-lg-block bg-primary rounded-start">
                   <div class="row g-0 h-100">
                     <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
-                      <h3 class="text-white mt-5 mb-4">Register</h3>
-                      <p class="text-4 text-light lh-base mb-4">Enter your personal details and start journey with us.</p>
+                      <h3 class="text-white mt-5 mb-4">Registrate</h3>
+                      <p class="text-4 text-light lh-base mb-4">Queremos conocerte, ingresa tu informacion.</p>
                       <div class="mt-auto mb-4"><img class="img-fluid w-100 w-sm-40 w-md-50" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy">
                       </div>
                     </div>
@@ -744,30 +768,29 @@
                   <div class="container my-auto py-5">
                     <div class="row">
                       <div class="col-11 col-lg-10 mx-auto">
-                        <h3 class="text-center text-4 mb-4">Create an Account</h3>
+                        <h3 class="text-center text-4 mb-4">Crear una cuenta</h3>
                         <div class="d-flex flex-column align-items-center mb-3">
                          
                         </div>
                         
-                        <form id="signupForm"  class="form-border" method="post">
+                        <!-- Inicio form registro --> 
+                        <form id="signupForm"  class="form-border" action="controllers/users/registro.php" method="POST">
                           <div class="mb-3">
-                            <input type="text" class="form-control border-2" id="fullName" required placeholder="Enter Your Name">
-                          </div>
-                          <div class="mb-3">
-                            <input type="email" class="form-control border-2" id="emailAddress" required placeholder="Enter Your Email">
+                            <input type="text" class="form-control border-2" id="fullName" name="nombreUsuario" required placeholder="Ingresa tu nombre">
                           </div>
                           <div class="mb-3">
-                            <input type="password" class="form-control border-2" id="loginPassword" required placeholder="Enter Password">
+                            <input type="email" class="form-control border-2" id="emailAddress" name="correoUsuario" required placeholder="Ingresa tu correo">
                           </div>
-                          <div class="form-check my-4">
-                            <input id="agree" name="agree" class="form-check-input" type="checkbox">
-                            <label class="form-check-label text-2" for="agree">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</label>
+                          <div class="mb-3">
+                            <input type="password" class="form-control border-2" id="loginPassword" name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
                           </div>
+                          
                           <div class="d-grid my-4">
-                            <button class="btn btn-primary" type="submit">Create Account</button>
+                            <button class="btn btn-primary" type="submit">Crear Cuenta</button>
                           </div>
                         </form>
-                        <p class="text-2 text-center mb-0">Already have an account? <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" data-bs-dismiss="modal">Log In</a></p>
+                        <!--Fin form registro-->
+                        <p class="text-2 text-center mb-0">Ya tienes una cuenta? <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" data-bs-dismiss="modal">Inicia Sesion</a></p>
                       </div>
                     </div>
                   </div>

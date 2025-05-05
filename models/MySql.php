@@ -25,6 +25,8 @@ class MySQL
         // le aplicamos la configuracion utf8 para evitar los signos raros
         mysqli_set_charset($this->conexion,"utf8");
 
+        
+
     }
 
     // creamos la funcion para desconectar la base de datos
