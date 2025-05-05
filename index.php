@@ -13,6 +13,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
     <!--<< Header Area >>-->
@@ -682,7 +683,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
               <div class="modal-content border-0">
                 <div class="modal-body p-0">
-                  <button type="button" class="btn-close btn-close-dark position-absolute top-0 end-0 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close btn-close-dark position-absolute top-0 end-0 m-2 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
                   <div class="row g-0"> 
           
                     <!-- Welcome Text (oculto en móvil y tablets) -->
@@ -746,7 +747,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content border-0">
             <div class="modal-body p-0">
-              <button type="button" class="btn-close btn-close-dark position-absolute top-0 end-0 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close btn-close-dark position-absolute top-0 end-0 m-2 me-sm-n4 mt-sm-n4" data-bs-dismiss="modal" aria-label="Close"></button>
               <div class="row g-0"> 
                 <!-- Welcome Text
                 ====================== -->
