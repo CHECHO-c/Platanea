@@ -15,18 +15,36 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
             $Usuario = new Usuario($nombre,$correo,$contraseña);
             
             if(!$Usuario->verificarNombre()){
-                echo "Nombre invalido <br>";
+              $error['errorNombre']=true;
             }
             if(!$Usuario->verificarContraseña()){
-                echo "Contraseña minimo 8 caracteres <br>";
+                $error['errorContraseña']=true;
             }
             if(!$Usuario->verificarCorreo()){
-                echo "Correo Invalido <br>";
+                $error['errorCorreo']=true;
             }
+
+
+
+
+            if(!empty($error)){
+                $_SESSION['old']=$_POST;
+                $_SESSION['error']=$error;
+
+                header("Location: ../../index.php");
+            }
+
+        }else{
+            $error['datosVacio'];
+            $_SESSION['error']=$error;
+            header("Location: ../../index.php");
 
         }
 
 
 
+}
+else{
+    header("Location: ../../index.php");
 }
 

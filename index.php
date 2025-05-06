@@ -1,6 +1,14 @@
 <?php
     session_start();
+    
+        $error = $_SESSION['error'] ?? [];
+        $old = $_SESSION['old'] ?? [];
+        
+        unset($_SESSION['error'],$_SESSION['old']);
 
+        
+
+    
 
 
 
@@ -15,6 +23,7 @@
 
 
 <!DOCTYPE html>
+
 <html lang="en">
     <!--<< Header Area >>-->
     <head>
@@ -32,7 +41,10 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <!--<< Font Awesome.css >>-->
         <link rel="stylesheet" href="assets/css/font-awesome.css">
-        
+
+        <?php if(!empty($error)): ?>
+        <script src="/assets/js/retornarError.js"></script> 
+        <?php endif ?>
 
         <!--<< Animate.css >>-->
         <link rel="stylesheet" href="assets/css/animate.css">
@@ -53,6 +65,9 @@
      
     </head>
     <body>
+
+
+    <?php if(empty($error)): ?>
         <!-- Proloader Start -->
         <div id="preloader" class="preloader">
             <div class="animation-preloader">
@@ -103,6 +118,7 @@
                 </div>
             </div>
         </div>
+        <?php endif ?>
 
         <!-- Offcanvas Area Start -->
         <div class="fix-area">
@@ -712,7 +728,7 @@
 
                             <form id="forgotForm" class="form-border" action="controllers/users/recuperarContraseña.php" method="POST">
                               <div class="mb-3">
-                                <input type="email" class="form-control border-2" id="emailAddress" required placeholder="Ingresa tu correo electronico">
+                                <input type="email" class="form-control border-2" id="emailAddressForgot" required placeholder="Ingresa tu correo electronico">
                               </div>
                               <div class="d-grid my-4">
                                 <button class="btn btn-primary" type="submit">Enviar</button>
@@ -776,14 +792,27 @@
                         
                         <!-- Inicio form registro --> 
                         <form id="signupForm"  class="form-border" action="controllers/users/registro.php" method="POST">
-                          <div class="mb-3">
-                            <input type="text" class="form-control border-2" id="fullName" name="nombreUsuario" required placeholder="Ingresa tu nombre">
+
+                        <p class="text-start text-danger"> <?php echo isset($error['datosVacio']) ? 'Enviaste datos vacios': ''; ?></p>
+                            
+                          <div class="mb-3 ">
+                        <!-- Mostrar error por nombre de usuario --> 
+                            <p class="text-start text-danger"> <?php echo isset($error['errorNombre']) ? 'Nombre invalido ': ''; ?></p>
+                            <input type="text" class="form-control border-2 <?php echo isset($error['errorNombre'])? 'is-invalid':''; ?>"  id="fullNameRegistro" <?php echo isset($old['nombreUsuario']) ? 'value='. htmlspecialchars($old['nombreUsuario']).'' : '' ?>  name="nombreUsuario" required placeholder="Ingresa tu nombre">
                           </div>
+
+
                           <div class="mb-3">
-                            <input type="email" class="form-control border-2" id="emailAddress" name="correoUsuario" required placeholder="Ingresa tu correo">
+                        <!-- Mostrar error por correo --> 
+                            <p class="text-start text-danger"> <?php echo isset($error['errorCorreo']) ? 'Correo Invalido':''; ?></p>
+                            <input type="email" class="form-control border-2 <?php echo isset($error['errorCorreo'])? 'is-invalid':''; ?>" id="emailAddressRegistro" <?php echo isset($old['correoUsuario']) ? 'value='. htmlspecialchars($old['correoUsuario']).'' : '' ?> name="correoUsuario" required placeholder="Ingresa tu correo">
                           </div>
+
+
                           <div class="mb-3">
-                            <input type="password" class="form-control border-2" id="loginPassword" name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
+                        <!-- Mostrar error por contraseña --> 
+                            <p class="text-start text-danger"> <?php echo isset($error['errorContraseña'])?'La contraseña debe tener 8 caracteres':''; ?></p>
+                            <input type="password" class="form-control border-2 <?php echo isset($error['errorContraseña'])? 'is-invalid':''; ?>" id="loginPasswordRegistro" <?php echo isset($old['contraseñaUsuario']) ? 'value='. htmlspecialchars($old['contraseñaUsuario']).'' : '' ?> name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
                           </div>
                           
                           <div class="d-grid my-4">
