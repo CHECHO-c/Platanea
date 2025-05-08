@@ -793,26 +793,26 @@
                         <!-- Inicio form registro --> 
                         <form id="signupForm"  class="form-border" action="controllers/users/registro.php" method="POST">
 
-                        <p class="text-start text-danger"> <?php echo isset($error['datosVacio']) ? 'Enviaste datos vacios': ''; ?></p>
+                        <p class="text-start text-danger"> <?php echo $error['datosVacio']??''; ?></p>
                             
                           <div class="mb-3 ">
                         <!-- Mostrar error por nombre de usuario --> 
-                            <p class="text-start text-danger"> <?php echo isset($error['errorNombre']) ? 'Nombre invalido ': ''; ?></p>
-                            <input type="text" class="form-control border-2 <?php echo isset($error['errorNombre'])? 'is-invalid':''; ?>"  id="fullNameRegistro" <?php echo isset($old['nombreUsuario']) ? 'value='. htmlspecialchars($old['nombreUsuario']).'' : '' ?>  name="nombreUsuario" required placeholder="Ingresa tu nombre">
+                            <p class="text-start text-danger"> <?php echo $error['errorNombre']??''; ?></p>
+                            <input type="text" class="form-control border-2 <?php echo isset($error['errorNombre'])? 'is-invalid':''; ?>"  id="fullNameRegistro" <?php echo 'value="'. ($old['nombreUsuario']??'') .'"'; ?>  name="nombreUsuario" required placeholder="Ingresa tu nombre">
                           </div>
 
 
                           <div class="mb-3">
                         <!-- Mostrar error por correo --> 
-                            <p class="text-start text-danger"> <?php echo isset($error['errorCorreo']) ? 'Correo Invalido':''; ?></p>
-                            <input type="email" class="form-control border-2 <?php echo isset($error['errorCorreo'])? 'is-invalid':''; ?>" id="emailAddressRegistro" <?php echo isset($old['correoUsuario']) ? 'value='. htmlspecialchars($old['correoUsuario']).'' : '' ?> name="correoUsuario" required placeholder="Ingresa tu correo">
+                            <p class="text-start text-danger"> <?php echo $error['errorCorreo']??''; ?></p>
+                            <input type="email" class="form-control border-2 <?php echo isset($error['errorCorreo'])? 'is-invalid':''; ?>" id="emailAddressRegistro" <?php echo 'value="'. ($old['correoUsuario']??'') .'"';?> name="correoUsuario" required placeholder="Ingresa tu correo">
                           </div>
 
 
                           <div class="mb-3">
                         <!-- Mostrar error por contraseña --> 
-                            <p class="text-start text-danger"> <?php echo isset($error['errorContraseña'])?'La contraseña debe tener 8 caracteres':''; ?></p>
-                            <input type="password" class="form-control border-2 <?php echo isset($error['errorContraseña'])? 'is-invalid':''; ?>" id="loginPasswordRegistro" <?php echo isset($old['contraseñaUsuario']) ? 'value='. htmlspecialchars($old['contraseñaUsuario']).'' : '' ?> name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
+                            <p class="text-start text-danger"> <?php echo $error['errorContraseña']??''; ?></p>
+                            <input type="password" class="form-control border-2 <?php echo isset($error['errorContraseña'])? 'is-invalid':''; ?>" id="loginPasswordRegistro" <?php echo 'value="'. ($old['contraseñaUsuario']??'') .'"'; ?> name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
                           </div>
                           
                           <div class="d-grid my-4">
