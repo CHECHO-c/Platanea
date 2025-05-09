@@ -17,9 +17,11 @@ class ValidarUsuario{
         }
 
 
-        if(!filter_var($this->datos['correoUsuario'],FILTER_VALIDATE_EMAIL)){
+        if(!filter_var($this->datos['correoUsuario'],FILTER_VALIDATE_EMAIL)|| !preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$this->datos['correoUsuario'])){
             $errores['errorCorreo']='Este correo es invalido';
         }
+
+        
 
         if(!preg_match('/^[\p{L}\s]+$/u',$this->datos['nombreUsuario'])){
             $errores['errorNombre']="El nombre no puede contener (Numeros o Caracteres especiales) ";
