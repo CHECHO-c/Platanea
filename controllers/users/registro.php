@@ -12,9 +12,21 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
             $_SESSION['error']=$errores;
             header("Location: ../../index.php");
         }
+        else{
+            echo "exito";
+        }
+
+
+
+
+
+
+
+
+
 
 }
-else{
-    header("Location: ../../index.php");
-}
+// else{
+//     header("Location: ../../index.php");
+// }
 

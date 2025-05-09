@@ -797,23 +797,26 @@
                             
                           <div class="mb-3 ">
                         <!-- Mostrar error por nombre de usuario --> 
-                            <p class="text-start text-danger"> <?php echo $error['errorNombre']??''; ?></p>
+                           
                             <input type="text" class="form-control border-2 <?php echo isset($error['errorNombre'])? 'is-invalid':''; ?>"  id="fullNameRegistro" <?php echo 'value="'. ($old['nombreUsuario']??'') .'"'; ?>  name="nombreUsuario" required placeholder="Ingresa tu nombre">
-                          </div>
+                            <p class="text-start text-danger"> <?php echo $error['errorNombre']??''; ?></p>  
+                        </div>
 
 
                           <div class="mb-3">
                         <!-- Mostrar error por correo --> 
-                            <p class="text-start text-danger"> <?php echo $error['errorCorreo']??''; ?></p>
+                            
                             <input type="email" class="form-control border-2 <?php echo isset($error['errorCorreo'])? 'is-invalid':''; ?>" id="emailAddressRegistro" <?php echo 'value="'. ($old['correoUsuario']??'') .'"';?> name="correoUsuario" required placeholder="Ingresa tu correo">
-                          </div>
+                            <p class="text-start text-danger"> <?php echo $error['errorCorreo']??''; ?></p>  
+                        </div>
 
 
                           <div class="mb-3">
                         <!-- Mostrar error por contraseña --> 
-                            <p class="text-start text-danger"> <?php echo $error['errorContraseña']??''; ?></p>
+                            
                             <input type="password" class="form-control border-2 <?php echo isset($error['errorContraseña'])? 'is-invalid':''; ?>" id="loginPasswordRegistro" <?php echo 'value="'. ($old['contraseñaUsuario']??'') .'"'; ?> name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
-                          </div>
+                            <p class="text-start text-danger"> <?php echo $error['errorContraseña']??''; ?></p>  
+                        </div>
                           
                           <div class="d-grid my-4">
                             <button class="btn btn-primary" type="submit">Crear Cuenta</button>
