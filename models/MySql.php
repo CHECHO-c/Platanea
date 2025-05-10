@@ -6,7 +6,7 @@ class MySQL
     private $ipServidor = "localhost"; // inicializamos la ip del servidor de nuestro motor de base de datos
     private $usuarioBase = "root"; // inicializamos el usuario base que tenemos registrado en nuestro motor de base de datos
     private $contrasena = ""; // inicializamos la contraseña que tengamos en nuestro motor de base de datos
-    private $nombreBaseDatos = ""; // inicializamos el nombre de la base de datos
+    private $nombreBaseDatos = "platanea_db"; // inicializamos el nombre de la base de datos
 
     private $conexion; // inicializamos la variable para inicializar la conexion
 
@@ -52,10 +52,7 @@ class MySQL
         $resultado = mysqli_query($this->conexion,$consulta);
 
         // verificamos que no haya ningun error
-        if(!$resultado)
-        {
-            echo "Error en la consulta: ".mysqli_error($this->conexion);
-        }
+       
 
         // retornamos el valor del resultado
         return $resultado;

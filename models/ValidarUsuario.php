@@ -12,6 +12,7 @@ class ValidarUsuario{
 
         if(empty(trim($this->datos['nombreUsuario']?? '')) ||
             empty(trim($this->datos['correoUsuario']?? ''))||
+            empty(trim($this->datos['telefonoUsuario']??''))||
             empty(trim($this->datos['contraseñaUsuario']?? ''))){
             $errores['datosVacio']="Enviaste datos vacios";
         }
@@ -21,7 +22,9 @@ class ValidarUsuario{
             $errores['errorCorreo']='Este correo es invalido';
         }
 
-        
+        if(!filter_var($this->datos['telefonoUsuario'], FILTER_VALIDATE_INT) || strlen($this->datos['telefonoUsuario'])!=10){
+            $errores['errorTelefono']='Este telefono es invalido';
+        }
 
         if(!preg_match('/^[\p{L}\s]+$/u',$this->datos['nombreUsuario'])){
             $errores['errorNombre']="El nombre no puede contener (Numeros o Caracteres especiales) ";

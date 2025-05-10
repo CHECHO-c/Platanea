@@ -811,10 +811,19 @@
                         </div>
 
 
+                        <div class="mb-3">
+                        <!-- Mostrar error por telefono --> 
+                            
+                            <input type="text" inputmode="numeric" pattern="\d{10}" title="El telefono debe contener 10 digitos" class="form-control border-2 <?php echo isset($error['errorTelefono'])? 'is-invalid':''; ?>" id="loginTelefonoRegistro" <?php echo 'value="'.($old['telefonoUsuario']??'') .'"'; ?> name="telefonoUsuario" required placeholder="Ingresa tu telefono">
+                            <p class="text-start text-danger"> <?php echo $error['errorTelefono']??''; ?></p>  
+                        </div>
+
+
+
                           <div class="mb-3">
                         <!-- Mostrar error por contraseña --> 
                             
-                            <input type="password" class="form-control border-2 <?php echo isset($error['errorContraseña'])? 'is-invalid':''; ?>" id="loginPasswordRegistro" <?php echo 'value="'. ($old['contraseñaUsuario']??'') .'"'; ?> name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
+                            <input type="password" class="form-control border-2 <?php echo isset($error['errorContraseña'])? 'is-invalid':''; ?>" id="loginPasswordRegistro" <?php echo 'value="'.htmlspecialchars(($old['contraseñaUsuario']??'')) .'"'; ?> name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
                             <p class="text-start text-danger"> <?php echo $error['errorContraseña']??''; ?></p>  
                         </div>
                           
