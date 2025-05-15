@@ -25,14 +25,13 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
         try{
             $mysql->conectar();
 
-            $consulta = "insert into cliente (nombre_cliente,telefono,correo,contraseña_cliente) values ('$nombre','$correo','$telefono','$contraseña')";
+            $consulta = "insert into cliente (nombre_cliente,telefono,correo,contraseña_cliente) values ('$nombre','$telefono','$correo','$contraseña')";
     
             $resultado = $mysql->ejecutarConsulta($consulta);
             
             $mysql->desconectar();
     
             if($resultado){
-                echo "Registro exitoso seras redirigido ala pagina principal";
                 header('refresh:5; url=../../index.php');
                 exit();
             }

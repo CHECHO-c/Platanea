@@ -58,6 +58,8 @@ class MySQL
         return $resultado;
 
     }
+
+ 
     
     public function obtenerConexion()
     {

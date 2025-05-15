@@ -3,17 +3,9 @@
     
         $error = $_SESSION['error'] ?? [];
         $old = $_SESSION['old'] ?? [];
-        
-        unset($_SESSION['error'],$_SESSION['old']);
-
-        
-
-    
-
-
-
-       
-
+        $nombreUsuario = $_SESSION['nombreUsuario']??'';
+        $correoUsuario = $_SESSION['correoUsuario']??'';
+        unset($_SESSION['error'],$_SESSION['old'],$_SESSION['nombreUsuario'],$_SESSION['correoUsuario']);
 
 ?>
 
@@ -42,8 +34,12 @@
         <!--<< Font Awesome.css >>-->
         <link rel="stylesheet" href="assets/css/font-awesome.css">
 
-        <?php if(!empty($error)): ?>
+        <?php if(!empty($error) && empty($error['errorCorreoLogin']) && empty($error['contraseñaIncorrecta']) && empty($error['correoInexistente'])): ?>
         <script src="/assets/js/retornarError.js"></script> 
+        <?php endif ?>
+
+        <?php if(!empty($error['errorCorreoLogin']) || !empty($error['contraseñaIncorrecta']) || !empty($error['correoInexistente'])): ?>
+        <script src="/assets/js/retornarErrorLogin.js"></script> 
         <?php endif ?>
 
         <!--<< Animate.css >>-->
@@ -169,13 +165,17 @@
                                     </div>
                                 </li>
                             </ul>
-        
+                        
                             <div class="header-button mt-4">
                                 <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" class="theme-btn me-2">
-                                    <span class="button-text">Iniciar Sesión</span>
+                                    <span class="button-text">Iniciar Sesion</span>
                                 </a>
                                 
+                                
                             </div>
+                            
+                                
+                            
         
                             <div class="social-icon d-flex align-items-center mt-3">
                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -212,9 +212,12 @@
                                 </nav>
                             </div>
                             <div class="header-right d-flex align-items-center gap-3">
-                              
-                                <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" class="theme-btn bg-red-2">Iniciar Sesión</a>
-                                
+                                <?php if(!empty($nombreUsuario)): ?>
+                                <a class="text-success bg-red-2"><?php echo $nombreUsuario ?></a>
+                                <?php else: ?>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" class="theme-btn bg-red-2">Iniciar Sesión</a>
+                                <?php endif ?>
+
                                 <a href="./assets/html/shop-cart.html" class="cart-icon mx-4">
                                     <i class="far fa-shopping-basket"></i>
                                 </a>
@@ -656,19 +659,24 @@
                         
                 <!-- ACA VA EL FORM LOGING --> 
                         <form action="controllers/users/login.php" method="POST">
+
+                        <p class="text-start text-danger"> <?php echo $error['datosVacioLogin']??''; ?></p>
                           <div class="mb-3">
-                            <input type="email" class="form-control border-2" id="emailAddress" name="correoUsuario" required placeholder="Ingresa tu correo">
-                          </div>
+                            <input type="email" class="form-control border-2  <?php echo isset($error['errorCorreoLogin'])? 'is-invalid':''; ?> <?php echo isset($error['correoInexistente'])? 'is-invalid':''; ?>" id="emailAddress" <?php echo 'value="'. ($old['correoUsuarioLogin']??'') .'"'; ?> name="correoUsuarioLogin" required placeholder="Ingresa tu correo">
+                            <p class="text-start text-danger"> <?php echo $error['errorCorreoLogin']??''; ?></p> 
+                            <p class="text-start text-danger"> <?php echo $error['correoInexistente']??''; ?></p>   
+                        </div>
+
+
                           <div class="mb-3">
-                            <input type="password" class="form-control border-2" id="loginPassword" name="contrasenaUsuario" required placeholder="Ingresa tu contraseña">
-                          </div>
+                            <input type="password" class="form-control border-2" id="loginPassword" <?php echo 'value="'. htmlspecialchars($old['contrasenaUsuarioLogin']??'') .'"'; ?> name="contrasenaUsuarioLogin" required placeholder="Ingresa tu contraseña">
+                            <p class="text-start text-danger"> <?php echo $error['contraseñaIncorrecta']??''; ?></p>    
+                        </div>
+
+
+
                           <div class="row my-4">
-                            <div class="col">
-                              <div class="form-check">
-                                <input id="remember-me" name="recuerdame" class="form-check-input" type="checkbox">
-                                <label class="form-check-label text-2" for="remember-me">Recordarme</label>
-                              </div>
-                            </div>
+                            
                             <div class="col text-2 text-end"><a href="" data-bs-toggle="modal" data-bs-target="#forgot-password-modal" data-bs-dismiss="modal">Olvidaste tu contraseña ?</a></div>
                           </div>
                           <div class="d-grid my-4">
@@ -806,8 +814,9 @@
                           <div class="mb-3">
                         <!-- Mostrar error por correo --> 
                             
-                            <input type="email" class="form-control border-2 <?php echo isset($error['errorCorreo'])? 'is-invalid':''; ?>" id="emailAddressRegistro" <?php echo 'value="'. ($old['correoUsuario']??'') .'"';?> name="correoUsuario" required placeholder="Ingresa tu correo">
+                            <input type="email" class="form-control border-2 <?php echo isset($error['errorCorreo'])? 'is-invalid' : ''; ?> <?php echo isset($error['correoOcupado'])? 'is-invalid' : ''; ?>" id="emailAddressRegistro" <?php echo 'value="'. ($old['correoUsuario']??'') .'"';?> name="correoUsuario" required placeholder="Ingresa tu correo">
                             <p class="text-start text-danger"> <?php echo $error['errorCorreo']??''; ?></p>  
+                            <p class="text-start text-danger"> <?php echo $error['correoOcupado']??''; ?></p> 
                         </div>
 
 
@@ -823,7 +832,7 @@
                           <div class="mb-3">
                         <!-- Mostrar error por contraseña --> 
                             
-                            <input type="password" class="form-control border-2 <?php echo isset($error['errorContraseña'])? 'is-invalid':''; ?>" id="loginPasswordRegistro" <?php echo 'value="'.htmlspecialchars(($old['contraseñaUsuario']??'')) .'"'; ?> name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
+                            <input type="password" class="form-control border-2 <?php echo isset($error['errorContraseña'])? 'is-invalid':''; ?>" id="loginPasswordRegistro" <?php echo 'value="'.htmlspecialchars(string: ($old['contraseñaUsuario']??'')) .'"'; ?> name="contraseñaUsuario" required placeholder="Ingresa tu contraseña">
                             <p class="text-start text-danger"> <?php echo $error['errorContraseña']??''; ?></p>  
                         </div>
                           
