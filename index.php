@@ -5,7 +5,7 @@
         $old = $_SESSION['old'] ?? [];
         $nombreUsuario = $_SESSION['nombreUsuario']??'';
         $correoUsuario = $_SESSION['correoUsuario']??'';
-        unset($_SESSION['error'],$_SESSION['old'],$_SESSION['nombreUsuario'],$_SESSION['correoUsuario']);
+        unset($_SESSION['error'],$_SESSION['old']);
 
 ?>
 
@@ -167,9 +167,18 @@
                             </ul>
                         
                             <div class="header-button mt-4">
+                                <?php if(!empty($nombreUsuario)): ?>
+                                <form action="controllers\users\cerrarSesion.php" method="POST">
+                                    
+                                       <button class="theme-btn bg-red-2 text-white" type="submit">Cerrar Sesion</button>
+                                    
+                                </form>
+                                    
+                                <?php else: ?>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" class="theme-btn me-2">
-                                    <span class="button-text">Iniciar Sesion</span>
+                                    <span class="button-text" >Inicar Sesion</span>
                                 </a>
+                                <?php endif ?>
                                 
                                 
                             </div>

@@ -6,49 +6,22 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
     $validaciones = new ValidarUsuario($_POST);
     
-    $errores = $validaciones->validarLogin();
+     list($datosUsuario,$erroresLogin) = $validaciones->validarLogin();
 
-    if(!empty($errores)){
-         $_SESSION['old']=$_POST;
-            $_SESSION['error']=$errores;
+    if(!empty($erroresLogin)){
+            $_SESSION['old']=$_POST;
+            $_SESSION['error']=$erroresLogin;
             header("Location: ../../index.php");
             exit();
     }
     
-
-    $mysql = new MySQL();
-
-    $correo = $_POST['correoUsuarioLogin'];
-    $contraseñaIngresada = htmlspecialchars($_POST['contrasenaUsuarioLogin']);
-
-    $consulta = "SELECT * from cliente where correo ='$correo'";;
-    
-    $mysql->conectar();
-
-    $resultado = $mysql->ejecutarConsulta($consulta);
-
-    $datosUsuario = mysqli_fetch_assoc($resultado);
-
-    $mysql->desconectar();
-
-    $contraseñaUsuario = $datosUsuario['contraseña_cliente'];
-
-    if($contraseñaIngresada===$contraseñaUsuario){
-        $_SESSION['nombreUsuario']=$datosUsuario['nombre_cliente'];
-         $_SESSION['telefonoUsuario']=$datosUsuario['telefono'];
+    if($datosUsuario){
+            $_SESSION['nombreUsuario']=$datosUsuario['nombre_cliente'];
+            $_SESSION['telefonoUsuario']=$datosUsuario['telefono'];
             $_SESSION['correoUsuario']=$datosUsuario['correo'];
-                header("Location: ../../index.php");
-                    exit();
-
-    }
-    else{
-         $_SESSION['old']=$_POST;
-            $errores['contraseñaIncorrecta']="Esta contraseña es incorrecta";
-            $_SESSION['error']=$errores;
             header("Location: ../../index.php");
             exit();
     }
-    
     
 
 
@@ -59,31 +32,5 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
 
 
-  <!-- $mysql = new MySQL();
-
-    $correo = $_POST['correoUsuarioLogin'];
-    $contraseñaIngresada = htmlspecialchars($_POST['contrasenaUsuarioLogin']);
-
-    $consulta = "SELECT * from cliente where correo ='$correo'";;
-    
-    $mysql->conectar();
-
-    $resultado = $mysql->ejecutarConsulta($consulta);
-
-    $datosUsuario = mysqli_fetch_assoc($resultado);
-
-    $mysql->desconectar();
-
-    $contraseñaUsuario = $datosUsuario['contraseña_cliente'];
-
-    if($contraseñaIngresada===$contraseñaUsuario){
-        echo "Exito";
-    }
-    else{
-         $_SESSION['old']=$_POST;
-            $errores['contraseñaIncorrecta']="Esta contraseña es incorrecta";
-            $_SESSION['error']=$errores;
-            header("Location: ../../index.php");
-            exit();
-    } -->
+  
     

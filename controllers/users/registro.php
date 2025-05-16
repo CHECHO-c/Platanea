@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
             $mysql->desconectar();
     
             if($resultado){
-                header('refresh:5; url=../../index.php');
+                header("Location: ../../index.php");
                 exit();
             }
         }

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2025 a las 00:26:57
+-- Tiempo de generación: 16-05-2025 a las 05:42:52
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,10 +40,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `nombre_cliente`, `telefono`, `correo`, `contraseña_cliente`) VALUES
-(3, 'Sergio', '3227685042', 'baloncestoentablon@gmail.com', '12345678'),
-(5, 'Sergio', '3227865404', 'jhonny@gmail.com', '12345678'),
-(6, 'Jhoan', '3227865019', 'jhonigga@gmail.com', '12345678'),
-(7, 'Juan camilo', '3227165105', 'ollas@gmail.com', '12345678');
+(1, 'Sergio', 'baloncestoentablon@gmail.com', '3227186105', '112233445566');
 
 --
 -- Índices para tablas volcadas
@@ -53,9 +50,7 @@ INSERT INTO `cliente` (`id_cliente`, `nombre_cliente`, `telefono`, `correo`, `co
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id_cliente`),
-  ADD UNIQUE KEY `correo` (`correo`),
-  ADD UNIQUE KEY `telefono` (`telefono`);
+  ADD PRIMARY KEY (`id_cliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -65,7 +60,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

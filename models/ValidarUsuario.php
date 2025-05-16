@@ -64,6 +64,7 @@ class ValidarUsuario{
         require_once 'MySql.php';
         $mysql = new MySQL();
         $errorLogin=[];
+        $usuarioDatos =[];
 
         
         if(empty(trim($this->datos['correoUsuarioLogin']??''))||
@@ -90,25 +91,6 @@ class ValidarUsuario{
             $errorLogin['correoInexistente']="Este correo no existe";
         }
 
-        
-
-
-
-        
-
-        return $errorLogin;
-
-           
-    }
-
-    public function verificarContraseña(){
-        require_once 'MySql.php';
-        $mysql = new MySQL();
-        $usuarioDatos =[];
-        $errores=[];
-        
-        
-        
         //Validar Contraseña
         $consulta = "SELECT * from cliente where correo="."'".$this->datos['correoUsuarioLogin']."'";
         $mysql->conectar();
@@ -122,11 +104,20 @@ class ValidarUsuario{
             
         }
         else{
-            $errores['contraseñaIncorrecta']="Contraseña incorrecta";
+            $errorLogin['contraseñaIncorrecta']="Contraseña incorrecta";
         }
 
-        return [$usuarioDatos,$errores];
+        
 
+
+
+        
+
+        return [$usuarioDatos,$errorLogin];
+
+           
     }
+
+    
 }
 ?>
