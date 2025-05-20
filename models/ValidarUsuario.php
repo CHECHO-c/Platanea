@@ -25,7 +25,7 @@ class ValidarUsuario{
 
        
 
-        $consulta="SELECT count(*) as cuenta from cliente where correo="."'".$this->datos['correoUsuario']."'";
+        $consulta="SELECT count(*) as cuenta from usuario where correo="."'".$this->datos['correoUsuario']."'";
         $mysql->conectar();
 
         $resultado=$mysql->ejecutarConsulta($consulta);
@@ -76,30 +76,30 @@ class ValidarUsuario{
             $errorLogin['errorCorreoLogin']="Este correo es invalido";
         }
 
-        $consulta="SELECT count(*) as cuenta from cliente where correo="."'".$this->datos['correoUsuarioLogin']."'";
+        $consulta="SELECT count(*) as cuenta from usuario where correo="."'".$this->datos['correoUsuarioLogin']."'";
         $mysql->conectar();
 
         $resultado=$mysql->ejecutarConsulta($consulta);
 
         if($resultado){
             $cantidadColumnas= mysqli_fetch_assoc ($resultado);
-
-            $mysql->desconectar();
         }
 
+        $mysql->desconectar();
         if($cantidadColumnas['cuenta']==0){
             $errorLogin['correoInexistente']="Este correo no existe";
         }
 
         //Validar Contraseña
-        $consulta = "SELECT * from cliente where correo="."'".$this->datos['correoUsuarioLogin']."'";
+        $consulta = "SELECT * from usuario where correo="."'".$this->datos['correoUsuarioLogin']."'";
         $mysql->conectar();
         $resultado = $mysql->ejecutarConsulta($consulta);
         $datosUsuario = mysqli_fetch_assoc($resultado);
         $mysql->desconectar();
-       
 
-        if($this->datos['contrasenaUsuarioLogin']===$datosUsuario['contraseña_cliente']){
+        $contraseñaCrypt = crypt($this->datos['contrasenaUsuarioLogin'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$' );
+
+        if($datosUsuario['contraseña']===$contraseñaCrypt){
             $usuarioDatos = $datosUsuario;
             
         }
@@ -116,6 +116,43 @@ class ValidarUsuario{
         return [$usuarioDatos,$errorLogin];
 
            
+    }
+
+    public function validarCorreo(){
+        require_once 'Mysql.php';
+        $errorForgot = [];
+        
+        if(empty(trim($this->datos["correoOlvide"]??''))){
+            $errorForgot['datosVacioForgot'] = "Enviaste un correo vacio";
+        }
+
+        if(!filter_var($this->datos['correoOlvide'],FILTER_VALIDATE_EMAIL)|| !preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$this->datos['correoOlvide'])){
+            $errorForgot['errorCorreoOlvide']="Este correo es invalido";
+        }
+
+
+
+        $mysql = new MySQL();
+
+        $mysql->conectar();
+        $consulta = "SELECT count(*) as cuenta from usuario where correo="."'".$this->datos['correoOlvide']."'";
+        $resultado = $mysql->ejecutarConsulta($consulta);
+
+        if ($resultado) 
+        {
+            $datos = mysqli_fetch_assoc($resultado);
+        }
+
+        if($datos['cuenta']==0){
+            $errorForgot["correoInexistenteForgot"] = "Este correo no esta registrado";
+            
+        }
+
+
+
+
+
+        return $errorForgot;
     }
 
     

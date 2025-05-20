@@ -21,11 +21,12 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
         $correo = $_POST['correoUsuario'];
         $telefono = $_POST['telefonoUsuario'];
         $contraseña = $_POST['contraseñaUsuario'];
+        $contraseñaCrypt = crypt($contraseña ,'$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
         
         try{
             $mysql->conectar();
 
-            $consulta = "insert into cliente (nombre_cliente,telefono,correo,contraseña_cliente) values ('$nombre','$telefono','$correo','$contraseña')";
+            $consulta = "INSERT INTO usuario (nombre,telefono,correo,contraseña ,foto,id_rol) VALUES ('$nombre','$telefono','$correo','$contraseñaCrypt',null,2)";
     
             $resultado = $mysql->ejecutarConsulta($consulta);
             
@@ -35,10 +36,13 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
                 header("Location: ../../index.php");
                 exit();
             }
+            else{
+            echo "error";
+            }
         }
         catch(Exception $e){
             //mensaje de prueba por lo pronto
-            echo "Error en la consulta <br>" . $e;
+            echo "Error en la consulta <br>";
         }
         
         

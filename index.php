@@ -4,7 +4,7 @@
         $error = $_SESSION['error'] ?? [];
         $old = $_SESSION['old'] ?? [];
         $nombreUsuario = $_SESSION['nombreUsuario']??'';
-        $correoUsuario = $_SESSION['correoUsuario']??'';
+        
         unset($_SESSION['error'],$_SESSION['old']);
 
 ?>
@@ -34,12 +34,16 @@
         <!--<< Font Awesome.css >>-->
         <link rel="stylesheet" href="assets/css/font-awesome.css">
 
-        <?php if(!empty($error) && empty($error['errorCorreoLogin']) && empty($error['contraseñaIncorrecta']) && empty($error['correoInexistente'])): ?>
+        <?php if(!empty($error['errorNombre']) || !empty($error['errorCorreo']) || !empty($error['correoOcupado']) || !empty($error['correoTelefono']) || !empty($error['datosVacio'])): ?>
         <script src="/assets/js/retornarError.js"></script> 
         <?php endif ?>
 
-        <?php if(!empty($error['errorCorreoLogin']) || !empty($error['contraseñaIncorrecta']) || !empty($error['correoInexistente'])): ?>
+        <?php if(!empty($error['errorCorreoLogin']) || !empty($error['contraseñaIncorrecta']) || !empty($error['correoInexistente']) || !empty($error['datosVacioLogin'])): ?>
         <script src="/assets/js/retornarErrorLogin.js"></script> 
+        <?php endif ?>
+
+        <?php if(!empty($error['errorCorreoOlvide']) || !empty($error['datosVacioForgot']) || !empty($error['correoInexistenteForgot'])): ?>
+        <script src="/assets/js/retornarErrorForgot.js"></script> 
         <?php endif ?>
 
         <!--<< Animate.css >>-->
@@ -227,7 +231,7 @@
                                     <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" class="theme-btn bg-red-2">Iniciar Sesión</a>
                                 <?php endif ?>
 
-                                <a href="./assets/html/shop-cart.html" class="cart-icon mx-4">
+                                <a href="/views/users/shop-cart.php" class="cart-icon mx-4">
                                     <i class="far fa-shopping-basket"></i>
                                 </a>
                                 <div class="header__hamburger d-xl-block my-auto">
@@ -432,62 +436,9 @@
         <!-- Choose Us Section Start -->
         <section class="choose-us fix section-padding pt-0 section-bg">
             <div class="container">
-                <div class="food-icon-wrapper bg-cover" style="background-image: url('assets/img/shape/food-shape-2.png');">
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-                            <div class="single-food-icon">
-                                <div class="icon">
-                                    <i class="flaticon-quality"></i>
-                                </div>
-                                <div class="content">
-                                    <h4>comida de súper calidad</h4>
-                                    <p>
-                                        Un equipo apasionado creando sabores únicos y experiencias deliciosas
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                            <div class="single-food-icon">
-                                <div class="icon">
-                                    <i class="flaticon-cooking"></i>
-                                </div>
-                                <div class="content">
-                                    <h4>recetas originales</h4>
-                                    <p>
-                                        Inspirados en la tradición, preparados con amor y creatividad en cada bocado
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".7s">
-                            <div class="single-food-icon">
-                                <div class="icon">
-                                    <i class="flaticon-fast-delivery"></i>
-                                </div>
-                                <div class="content">
-                                    <h4>entrega rápida y puntual</h4>
-                                    <p>
-                                        Tus plátanos fritos llegan calientes y crujientes en tiempo récord
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".9s">
-                            <div class="single-food-icon">
-                                <div class="icon">
-                                    <i class="flaticon-quality"></i>
-                                </div>
-                                <div class="content">
-                                    <h4>100% ingredientes frescos</h4>
-                                    <p>
-                                        Usamos solo plátanos de alta calidad y aceite fresco para cada pedido
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+
+
             </div>
         </section>
         
@@ -745,8 +696,11 @@
 
                             <form id="forgotForm" class="form-border" action="controllers/users/recuperarContraseña.php" method="POST">
                               <div class="mb-3">
-                                <input type="email" class="form-control border-2" id="emailAddressForgot" required placeholder="Ingresa tu correo electronico">
-                              </div>
+                                <p class="text-start text-danger"> <?php echo $error['datosVacioForgot']??''; ?></p> 
+                                <input type="email" class="form-control border-2" id="emailAddressForgot" name="correoOlvide" <?php echo 'value="'. ($old['correoOlvide']??'') .'"';?>  required placeholder="Ingresa tu correo electronico">
+                                    <p class="text-start text-danger"> <?php echo $error['errorCorreoOlvide']??''; ?></p> 
+                                    <p class="text-start text-danger"> <?php echo $error['correoInexistenteForgot']??''; ?></p>  
+                            </div>
                               <div class="d-grid my-4">
                                 <button class="btn btn-primary" type="submit">Enviar</button>
                               </div>
