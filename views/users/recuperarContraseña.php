@@ -1,3 +1,35 @@
+<?php
+require_once '../../models/MySql.php';
+
+  if(isset($_GET['codigo'],$_GET['correo'])){
+    
+    $mysql = new MySQL;
+    
+    $codigo = $_GET['codigo'];
+    $correo= $_GET['correo'];
+    
+    $consulta = "SELECT * FROM recuperacion where codigo='$codigo' AND correo='$correo' ";
+
+    $mysql->conectar();
+    $resultado = $mysql->ejecutarConsulta($consulta);
+
+    $numeroFilas = mysqli_num_rows($resultado);
+
+  
+    $mysql->desconectar();
+  }
+   else{
+      //  header("Location: ../../index.php");
+      //        exit();
+
+      echo "No isset";
+   }
+  
+
+?>
+
+
+<?php if($numeroFilas>0): ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,3 +139,9 @@
         <script src="../../assets/js/main.js"></script>
 </body>
 </html>
+<?php else: ?>
+  <h1>El codigo de recuperacion ha expirado o no existe</h1>
+<?php endif; ?>
+
+
+
