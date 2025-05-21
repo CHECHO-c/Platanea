@@ -11,25 +11,25 @@
         <!-- ======== Page title ============ -->
         <title>Foodking - Fast Food Restaurant Html</title>
         <!--<< Favcion >>-->
-        <link rel="shortcut icon" href="../img/logo/favicon.svg">
+        <link rel="shortcut icon" href="../../assets/img/logo/favicon.svg">
         <!--<< Bootstrap min.css >>-->
-        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"> 
         <!--<< Font Awesome.css >>-->
-        <link rel="stylesheet" href="../css/font-awesome.css">
+        <link rel="stylesheet" href="../../assets/css/font-awesome.css">
         <!--<< Animate.css >>-->
-        <link rel="stylesheet" href="../css/animate.css">
+        <link rel="stylesheet" href="..../assets//css/animate.css">
         <!--<< Magnific Popup.css >>-->
-        <link rel="stylesheet" href="../css/magnific-popup.css">
+        <link rel="stylesheet" href="../../assets/css/magnific-popup.css">
         <!--<< MeanMenu.css >>-->
-        <link rel="stylesheet" href="../css/meanmenu.css">
+        <link rel="stylesheet" href="../../assets/css/meanmenu.css">
         <!--<< Swiper Bundle.css >>-->
-        <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+        <link rel="stylesheet" href="../../assets/css/swiper-bundle.min.css">
         <!--<< Nice Select.css >>-->
-        <link rel="stylesheet" href="../css/nice-select.css">
+        <link rel="stylesheet" href="../../assets/css/nice-select.css">
         <!--<< Main.css >>-->
-        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../../assets/css/main.css">
         <!--<< Style.css >>-->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../../assets/css/styles.css">
     </head>
 
     <body>
@@ -377,28 +377,30 @@
         </div>
         
         <!--<< All JS Plugins >>-->
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/jquery-3.7.1.min.js"></script>
+         <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../assets/js/jquery-3.7.1.min.js"></script>
         <!--<< Viewport Js >>-->
-        <script src="../js/viewport.jquery.js"></script>
+        <script src="../../assets/js/viewport.jquery.js"></script> 
         <!--<< Bootstrap Js >>-->
-        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script src="../../assets/js/bootstrap.bundle.min.js"></script>
         <!--<< Nice Select Js >>-->
-        <script src="../js/jquery.nice-select.min.js"></script>
+        <script src="../../assets/js/jquery.nice-select.min.js"></script>
         <!--<< Waypoints Js >>-->
-        <script src="../js/jquery.waypoints.js"></script>
+        <script src="../../assets/js/jquery.waypoints.js"></script>
         <!--<< Counterup Js >>-->
-        <script src="../js/jquery.counterup.min.js"></script>
+        <script src="../../assets/js/jquery.counterup.min.js"></script>
         <!--<< Swiper Slider Js >>-->
-        <script src="../js/swiper-bundle.min.js"></script>
+        <script src="../../assets/js/swiper-bundle.min.js"></script>
         <!--<< MeanMenu Js >>-->
-        <script src="../js/jquery.meanmenu.min.js"></script>
+        <script src="../../assets/js/jquery.meanmenu.min.js"></script>
+        <!--<< CountDown Js >>-->
+        <script src="../../assets/js/countdowncustom.js"></script>
         <!--<< Magnific Popup Js >>-->
-        <script src="../js/jquery.magnific-popup.min.js"></script>
+        <script src="../../assets/js/jquery.magnific-popup.min.js"></script>
         <!--<< GSAP Animation Js >>-->
-        <script src="../js/animation.js"></script>
+        <script src="../../assets/js/animation.js"></script>
         <!--<< Wow Animation Js >>-->
-        <script src="../js/wow.min.js"></script>
+        <script src="../../assets/js/wow.min.js"></script>
         <!--<< Main.js >>-->
-        <script src="../js/main.js"></script>
+        <script src="../../assets/js/main.js"></script>
     </body>
 </html>

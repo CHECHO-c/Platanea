@@ -4,8 +4,9 @@
         $error = $_SESSION['error'] ?? [];
         $old = $_SESSION['old'] ?? [];
         $nombreUsuario = $_SESSION['nombreUsuario']??'';
+        $correoEnviado = $_SESSION['correoEnviado']??'';
         
-        unset($_SESSION['error'],$_SESSION['old']);
+        unset($_SESSION['error'],$_SESSION['old'],$_SESSION['correoEnviado']);
 
 ?>
 
@@ -33,6 +34,9 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <!--<< Font Awesome.css >>-->
         <link rel="stylesheet" href="assets/css/font-awesome.css">
+        
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
         <?php if(!empty($error['errorNombre']) || !empty($error['errorCorreo']) || !empty($error['correoOcupado']) || !empty($error['correoTelefono']) || !empty($error['datosVacio'])): ?>
         <script src="/assets/js/retornarError.js"></script> 
@@ -694,7 +698,7 @@
 
                         <!-- Inicio form olvide --> 
 
-                            <form id="forgotForm" class="form-border" action="controllers/users/recuperarContraseña.php" method="POST">
+                            <form id="forgotForm" class="form-border" action="controllers/users/enviarCorreo.php" method="POST">
                               <div class="mb-3">
                                 <p class="text-start text-danger"> <?php echo $error['datosVacioForgot']??''; ?></p> 
                                 <input type="email" class="form-control border-2" id="emailAddressForgot" name="correoOlvide" <?php echo 'value="'. ($old['correoOlvide']??'') .'"';?>  required placeholder="Ingresa tu correo electronico">
@@ -816,8 +820,30 @@
         </div>
       </div>
       <!-- Register Modal End -->
+        
+                                
+      <!-- MODALES DE CORROBACIONES -->
+        <?php if( $correoEnviado=="ok"): ?>
+            <script>
+                Swal.fire({
+                title: 'Correo enviado con exito',
+                text: 'Siga las instrucciones del correo para recuperar tu contraseña',
+                icon: 'success'
+            });
+            </script>
+        <?php elseif($correoEnviado=="no"): ?>
+            <script>
+                Swal.fire({
+                title: 'Ocurrio un error al enviar el correo',
+                text: 'Intentalo nuevamente',
+                icon: 'error'
+            });
+            </script>
+        <?php endif; ?>
+        
 
-
+        
+        
 
 
 
@@ -855,5 +881,8 @@
         <script src="assets/js/wow.min.js"></script>
         <!--<< Main.js >>-->
         <script src="assets/js/main.js"></script>
+
+       
+        
     </body>
 </html>

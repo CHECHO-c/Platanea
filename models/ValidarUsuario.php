@@ -23,6 +23,10 @@ class ValidarUsuario{
             $errores['datosVacio']="Enviaste datos vacios";
         }
 
+        if(!filter_var($this->datos['correoUsuario'],FILTER_VALIDATE_EMAIL)|| !preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$this->datos['correoUsuario'])){
+            $errores['errorCorreo']='Este correo es invalido';
+            return $errores;
+        }
        
 
         $consulta="SELECT count(*) as cuenta from usuario where correo="."'".$this->datos['correoUsuario']."'";
@@ -41,9 +45,7 @@ class ValidarUsuario{
         }
         
 
-         if(!filter_var($this->datos['correoUsuario'],FILTER_VALIDATE_EMAIL)|| !preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$this->datos['correoUsuario'])){
-            $errores['errorCorreo']='Este correo es invalido';
-        }
+         
 
         if($cantidadColumnas['cuenta']>0){
             $errores['correoOcupado']="Este correo esta en uso";
@@ -74,6 +76,7 @@ class ValidarUsuario{
 
          if(!filter_var($this->datos['correoUsuarioLogin'],FILTER_VALIDATE_EMAIL)|| !preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$this->datos['correoUsuarioLogin'])){
             $errorLogin['errorCorreoLogin']="Este correo es invalido";
+            return [null,$errorLogin];
         }
 
         $consulta="SELECT count(*) as cuenta from usuario where correo="."'".$this->datos['correoUsuarioLogin']."'";
@@ -124,10 +127,13 @@ class ValidarUsuario{
         
         if(empty(trim($this->datos["correoOlvide"]??''))){
             $errorForgot['datosVacioForgot'] = "Enviaste un correo vacio";
+            return $errorForgot;
         }
 
         if(!filter_var($this->datos['correoOlvide'],FILTER_VALIDATE_EMAIL)|| !preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$this->datos['correoOlvide'])){
             $errorForgot['errorCorreoOlvide']="Este correo es invalido";
+            return $errorForgot;
+
         }
 
 

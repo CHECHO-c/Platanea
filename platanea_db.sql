@@ -52,7 +52,7 @@ CREATE TABLE `usuario` (
   `telefono` varchar(12) NOT NULL,
   `correo` varchar(255) NOT NULL,
   `contraseña` varchar(100) NOT NULL,
-  `foto` text NOT NULL,
+  `foto` text ,
   `id_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
