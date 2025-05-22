@@ -52,8 +52,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if($resultado){
         $datos = mysqli_fetch_assoc($resultado);
+
+        $codigo = $datos["codigo"];
         $id = $datos["id"];
-        $consultaEliminar ="DELETE FROM recuperacion where id=$id";
+        $consultaEliminar ="DELETE FROM recuperacion where id=$id AND codigo='$codigo'";
         
         $resultadoEliminar = $mysql->ejecutarConsulta($consultaEliminar);
 
@@ -80,7 +82,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $mysql->desconectar();
 
 
-}  
+}else{
+        $_SESSION["contraseñaActualizada"] = "no";
+            header("Location: ../../index.php");
+                exit();
+}
 }   
 
 

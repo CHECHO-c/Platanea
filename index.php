@@ -215,17 +215,17 @@
                     <div class="mega-menu-wrapper">
                         <div class="header-main d-flex justify-content-between align-items-center">
                             <div class="logo">
-                                <a href="index.html" class="header-logo">
+                                <a href="index.php" class="header-logo">
                                     <img class="logo_platanea" src="assets/img/logo/logo_platanea.png" alt="logo-platanos">
                                 </a>
                             </div>
                             <div class="main-menu d-none d-lg-block">
                                 <nav>
                                     <ul class="d-flex gap-4 m-0">
-                                        <li><a href="index.html">Inicio</a></li>
-                                        <li><a href="shop.html">Tienda</a></li>
-                                        <li><a href="news.html">Blog</a></li>
-                                        <li><a href="contact.html">Contacto</a></li>
+                                        <li><a href="index.php">Inicio</a></li>
+                                        <li><a href="#">Tienda</a></li>
+                                        <li><a href="#">Blog</a></li>
+                                        <li><a href="#">Contacto</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -236,7 +236,7 @@
                                     <a href="" data-bs-toggle="modal" data-bs-target="#login-modal" class="theme-btn bg-red-2">Iniciar Sesión</a>
                                 <?php endif ?>
 
-                                <a href="/views/users/shop-cart.php" class="cart-icon mx-4">
+                                <a href="/views/users/carrito.php" class="cart-icon mx-4">
                                     <i class="far fa-shopping-basket"></i>
                                 </a>
                                 <div class="header__hamburger d-xl-block my-auto">

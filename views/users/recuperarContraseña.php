@@ -36,7 +36,7 @@ $numeroFilas =0;
 ?>
 
 
-<?php if($numeroFilas>0): ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +64,7 @@ $numeroFilas =0;
         <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 <body>
+  <?php if($numeroFilas>0): ?>
    <!-- Sección de Formulario de Login -->
 <section id="login-section" class="oxyy-login-register my-5">
   <div class="container">
@@ -132,7 +133,23 @@ $numeroFilas =0;
       <!-- Fin Formulario -->
     </div>
   </div>
+  
 </section>
+
+<?php else: ?>
+
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="card shadow-sm border-danger text-center p-4" style="max-width: 500px; width: 100%;">
+    <div class="card-body">
+      <i class="bi bi-exclamation-triangle-fill display-3 text-danger mb-3"></i>
+      <h1 class="h4 fw-bold text-danger">¡El código ha expirado o no existe!</h1>
+      <p class="text-muted mb-4">Intentalo nuevamente.</p>
+      <a href="../../index.php" class="btn btn-danger w-100">Regresar</a>
+    </div>
+  </div>
+</div>
+
+<?php endif; ?>
 
       <!--<< All JS Plugins >>-->
         <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../assets/js/jquery-3.7.1.min.js"></script>
@@ -165,9 +182,7 @@ $numeroFilas =0;
 
 </body>
 </html>
-<?php else: ?>
-  <h1>El codigo de recuperacion ha expirado o no existe</h1>
-<?php endif; ?>
+
 
 
 
