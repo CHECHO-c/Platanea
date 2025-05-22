@@ -5,8 +5,9 @@
         $old = $_SESSION['old'] ?? [];
         $nombreUsuario = $_SESSION['nombreUsuario']??'';
         $correoEnviado = $_SESSION['correoEnviado']??'';
+        $contraseñaActualizada = $_SESSION["contraseñaActualizada"]??"";
         
-        unset($_SESSION['error'],$_SESSION['old'],$_SESSION['correoEnviado']);
+        unset($_SESSION['error'],$_SESSION['old'],$_SESSION['correoEnviado'],$_SESSION["contraseñaActualizada"]);
 
 ?>
 
@@ -560,8 +561,8 @@
                         </div>
                         <div class="footer-address-text">
                             <h6>
-                                Cartago,<br>
-                               Colombia
+                                Cartago <br>
+                                Colombia
                             </h6>
                             <h5>Horario:</h5>
                             <h6>
@@ -840,6 +841,26 @@
             });
             </script>
         <?php endif; ?>
+
+
+        <?php if($contraseñaActualizada=="ok"): ?>
+            <script>
+                Swal.fire({
+                title: 'Contraseña actualizada con exito',
+                text: 'Platanastico',
+                icon: 'success'
+            });
+            </script>
+        <?php elseif($contraseñaActualizada=="no"): ?>
+            <script>
+                Swal.fire({
+                title: 'Ocurrio un error al actualizar la contraseña',
+                text: 'Intentalo nuevamente',
+                icon: 'error'
+            });
+            </script>
+        <?php endif; ?>
+
         
 
         

@@ -1,7 +1,13 @@
 <?php
 require_once '../../models/MySql.php';
-
+session_start();
+$numeroFilas =0;
   if(isset($_GET['codigo'],$_GET['correo'])){
+
+    $old = $_SESSION['old'] ?? [];
+    $error = $_SESSION['error'] ?? [];
+
+    unset($_SESSION['error'],$_SESSION['old']);
     
     $mysql = new MySQL;
     
@@ -14,8 +20,9 @@ require_once '../../models/MySql.php';
     $resultado = $mysql->ejecutarConsulta($consulta);
 
     $numeroFilas = mysqli_num_rows($resultado);
-
-  
+    //le envio por la session el valor de la query GET
+    $_SESSION['cadenaQuery'] = $_SERVER['QUERY_STRING'];
+    $_SESSION['correo'] = $correo;
     $mysql->desconectar();
   }
    else{
@@ -81,18 +88,34 @@ require_once '../../models/MySql.php';
             <div class="col-11 col-lg-10 mx-auto">
               <h3 class="text-center text-4 mb-4 fw-bold text-dark">Recupera tu contraseña</h3>
 
-              <form action="controllers/users/login.php" method="POST">
+              <form action="../../controllers/users/recuperarContraseña.php" method="POST">
+                            <p class="text-start text-danger"> <?php echo $error['datosVacio']??''; ?></p>
+                            <p class="text-start text-danger"> <?php echo $error['noCoinciden']??''; ?></p>    
+
                 
 
                 <div class="mb-3">
-                  <input type="email" class="form-control border border-2 rounded-3 py-2 px-3"    name="nuevaContraseña" required placeholder="Ingresa tu nueva contraseña">
+                  <input type="password" class="form-control border border-2 rounded-3 py-2 px-3 <?php echo isset($error['contrasena']) ? 'is-invalid' : ""; ?>" id="contraseña";   name="nuevaContraseña" <?php echo 'value="'. htmlspecialchars($old['nuevaContraseña']??'') .'"'; ?> required placeholder="Ingresa tu nueva contraseña">
+                            <p class="text-start text-danger"> <?php echo $error['contrasena']??''; ?></p>    
                   
                 </div>
 
                 <div class="mb-3">
-                  <input type="password" class="form-control border border-2 rounded-3 py-2 px-3" id="loginPassword"  name="confirmarContraseña" required placeholder="Confirma tu contraseña">
+                  <input type="password" class="form-control border border-2 rounded-3 py-2 px-3 <?php echo isset($error['confirmarContrasena']) ? 'is-invalid' : ""; ?>" id="confirmarContraseña"  name="confirmarContraseña" <?php echo 'value="'. htmlspecialchars($old['confirmarContraseña']??'') .'"'; ?> required placeholder="Confirma tu contraseña">
+                            <p class="text-start text-danger"> <?php echo $error['confirmarContrasena']??''; ?></p>    
                  
                 </div>
+
+                <div class="mb-3">
+                          <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="verContraseña">
+                          <label class="form-check-label" for="showPasswordCheck">
+                            Mostrar contraseña
+                          </label>
+            </div>
+                 
+                </div>
+
 
                 
 
@@ -137,6 +160,9 @@ require_once '../../models/MySql.php';
         <script src="../../assets/js/wow.min.js"></script>
         <!--<< Main.js >>-->
         <script src="../../assets/js/main.js"></script>
+
+        <script src="../../assets/js/verContrasena.js"></script>
+
 </body>
 </html>
 <?php else: ?>
