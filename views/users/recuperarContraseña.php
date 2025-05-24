@@ -76,7 +76,7 @@ $numeroFilas =0;
             <h3 class="mt-5 mb-4 text-white">Recupera tu contraseña</h3>
             <p class="text-4 lh-base mb-4">Tranquilo, nosotros te ayudamos .</p>
             <div class="mt-auto mb-4">
-              <img class="img-fluid w-100 w-sm-40 w-md-50" src="/assets/img/shape/loginPlatano.webp" alt="Oxyy">
+              <img class="img-fluid w-100 w-sm-40 w-md-50" src="/assets\img\icon\recoverIcon.png" alt="Oxyy">
             </div>
           </div>
         </div>

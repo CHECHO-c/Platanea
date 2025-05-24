@@ -25,6 +25,7 @@ Version: 2.0.0
   --bg: #f4f1ea;
   --bg2: #df0a0a0d;
 }
+
 .theme-btn {
   position: relative;
   display: inline-block;
@@ -95,6 +96,11 @@ Version: 2.0.0
 .eco-btn:active {
   transform: translateY(0);
 }
+
+.custom-shadow {
+  box-shadow: 0px 0px 52px 0px rgba(0, 22, 89, 0.17);
+}
+
 @media (max-width: 991px) {
   .theme-btn {
     padding: 16px 36px;
@@ -765,11 +771,30 @@ input.main-search-input::placeholder {
 @media (max-width: 1199px) {
   .section-padding {
     padding: 100px 0;
+  
   }
+  .bg-cover{
+        height: 60% !important;
+  }
+
 }
 @media (max-width: 991px) {
   .section-padding {
     padding: 80px 0;
+  
+  }
+
+    .bg-cover{
+        height: 50% !important;
+  }
+}
+@media (min-width: 1199px) and (max-width: 1500px) {
+  .section-padding {
+    padding: 100px 0;
+  }
+
+  .bg-cover {
+    height: 65% !important;
   }
 }
 
@@ -2949,11 +2974,11 @@ input.main-search-input::placeholder {
 }
 .hero-2 .hero-content h1 {
   color: var(--white);
-  font-size: 105px;
+  font-size: 98px;
 }
 @media (max-width: 1399px) {
   .hero-2 .hero-content h1 {
-    font-size: 90px;
+    font-size: 81px;
   }
 }
 @media (max-width: 1199px) {
@@ -3685,7 +3710,7 @@ input.main-search-input::placeholder {
   transition: all 0.3s ease-in-out;
 }
 .catagory-product-card h5 {
-  font-size: 19px;
+  font-size: 43px;
   color: var(--white);
   position: relative;
   z-index: 9;
@@ -3800,7 +3825,7 @@ input.main-search-input::placeholder {
   transition: all 0.3s ease-in-out;
 }
 .catagory-product-card .catagory-product-content p {
-  font-size: 16px;
+  font-size: 26px;
   font-weight: 600;
   color: var(--theme2);
   text-transform: uppercase;
@@ -7343,8 +7368,6 @@ input.main-search-input::placeholder {
   top: -7px;
   background: none;
   pointer-events: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   padding: 0;
   outline: none;
 }
@@ -12688,7 +12711,7 @@ p.sticky-label {
   .footer-content
   .social-icon
   a:hover {
-  background-color: var(--theme);
+  background-color: #379c1f;
   color: var(--white);
 }
 .footer-widgets-wrapper .single-footer-widget .list-items li {
