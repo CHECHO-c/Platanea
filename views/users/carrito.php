@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+$nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <!--<< Header Area >>-->
@@ -31,6 +41,7 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <!--<< Style.css >>-->
     <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/loginForm.css">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/logo/logo_platanea.png">
@@ -43,29 +54,29 @@
             <div class="spinner">
             </div>
             <div class="txt-loading">
-                <span data-text-preloader="F" class="letters-loading">
-                    F
+                <span data-text-preloader="P" class="letters-loading">
+                    P
                 </span>
-                <span data-text-preloader="O" class="letters-loading">
-                    O
+                <span data-text-preloader="L" class="letters-loading">
+                    L
                 </span>
-                <span data-text-preloader="0" class="letters-loading">
-                    O
+                <span data-text-preloader="A" class="letters-loading">
+                    A
                 </span>
-                <span data-text-preloader="D" class="letters-loading">
-                    D
+                <span data-text-preloader="T" class="letters-loading">
+                    T
                 </span>
-                <span data-text-preloader="K" class="letters-loading">
-                    K
-                </span>
-                <span data-text-preloader="I" class="letters-loading">
-                    I
+                <span data-text-preloader="A" class="letters-loading">
+                    A
                 </span>
                 <span data-text-preloader="N" class="letters-loading">
                     N
                 </span>
-                <span data-text-preloader="G" class="letters-loading">
-                    G
+                <span data-text-preloader="E" class="letters-loading">
+                    E
+                </span>
+                <span data-text-preloader="A" class="letters-loading">
+                    A
                 </span>
             </div>
             <p class="text-center">Loading</p>
@@ -138,13 +149,20 @@
                             </li>
                         </ul>
 
-                        <div class="header-button mt-4">
-                            <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
-                                class="theme-btn bg-red-2 me-2">
-                                <span class="button-text">Iniciar Sesión</span>
-                            </a>
+                       <div class="header-button mt-4">
+                            <?php if (!empty($nombreUsuario)): ?>
+                                <form action="../../controllers\users\cerrarSesion.php" method="POST">
 
-                        </div>
+                                    <button class="theme-btn bg-red-2 text-white" type="submit">Cerrar Sesion</button>
+
+                                </form>
+
+                            <?php else: ?>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
+                                    class="theme-btn bg-red-2 me-2">
+                                    <span class="button-text">Iniciar Sesion</span>
+                                </a>
+                            <?php endif ?>
 
                         <div class="social-icon d-flex align-items-center mt-3">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -181,12 +199,17 @@
                         </div>
                         <div class="header-right d-flex align-items-center gap-3">
 
-                            <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
-                                class="theme-btn bg-red-2">Iniciar Sesión</a>
+                           <?php if (!empty($nombreUsuario)): ?>
+                                <a class="text-success bg-red-2"><?php echo $nombreUsuario ?></a>
+                            <?php else: ?>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
+                                    class="theme-btn bg-red-2">Iniciar Sesión</a>
+                            <?php endif ?>
 
-                            <a href="./assets/html/shop-cart.html" class="cart-icon mx-4">
+                            <a href="carrito.php" class="cart-icon mx-4">
                                 <i class="far fa-shopping-basket"></i>
                             </a>
+                            
                             <div class="header__hamburger d-xl-block my-auto">
                                 <div class="sidebar__toggle">
                                     <div class="header-bar">
@@ -385,6 +408,311 @@
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
         </svg>
     </div>
+
+     <!-- Login Modal
+    =========================== -->
+
+    <div id="login-modal" class="modal fade oxyy-login-register" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+                <div class="modal-body p-0">
+                    <button type="button"
+                        class="btn-close btn-close-dark position-absolute top-0 end-0 m-2 me-sm-n4 mt-sm-n4"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="row g-0">
+                        <!-- Welcome Text
+                ====================== -->
+                        <div class="col-lg-5 d-none d-lg-block bg-primary rounded-start">
+                            <div class="row g-0 h-100">
+                                <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
+                                    <h3 class="text-white mt-5 mb-4">Iniciar Sesion</h3>
+                                    <p class="text-4 text-light lh-base mb-4">Mantente conectado con platanea y disfruta
+                                        de sus delicias.</p>
+                                    <div class="mt-auto mb-4"><img class="img-fluid w-100 w-sm-40 w-md-50"
+                                            src="/assets\img\icon\inicioIcon.png" alt="Oxyy">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Welcome Text End -->
+
+                        <!-- Login Form
+                ====================== -->
+                        <div class="col-lg-7 d-flex align-items-center bg-white rounded-end">
+                            <div class="container my-auto py-5">
+                                <div class="row">
+                                    <div class="col-11 col-lg-10 mx-auto">
+                                        <h3 class="text-center text-4 mb-4">Iniciar Sesion</h3>
+                                        <div class="d-flex flex-column align-items-center mb-3">
+
+                                        </div>
+
+                                        <!-- ACA VA EL FORM LOGING -->
+                                        <form action="../../controllers/users/login.php" method="POST">
+
+                                            <p class="text-start text-danger">
+                                                <?php echo $error['datosVacioLogin'] ?? ''; ?>
+                                            </p>
+                                            <div class="mb-3">
+                                                <input type="email"
+                                                    class="form-control border-2  <?php echo isset($error['errorCorreoLogin']) ? 'is-invalid' : ''; ?> <?php echo isset($error['correoInexistente']) ? 'is-invalid' : ''; ?>"
+                                                    id="emailAddress" <?php echo 'value="' . ($old['correoUsuarioLogin'] ?? '') . '"'; ?> name="correoUsuarioLogin" required
+                                                    placeholder="Ingresa tu correo">
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['errorCorreoLogin'] ?? ''; ?>
+                                                </p>
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['correoInexistente'] ?? ''; ?>
+                                                </p>
+                                            </div>
+
+
+                                            <div class="mb-3">
+                                                <input type="password" class="form-control border-2" id="loginPassword"
+                                                    <?php echo 'value="' . htmlspecialchars($old['contrasenaUsuarioLogin'] ?? '') . '"'; ?>
+                                                    name="contrasenaUsuarioLogin" required
+                                                    placeholder="Ingresa tu contraseña">
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['contraseñaIncorrecta'] ?? ''; ?>
+                                                </p>
+                                            </div>
+
+
+
+                                            <div class="row my-4">
+
+                                                <div class="col text-2 text-end"><a href="" data-bs-toggle="modal"
+                                                        data-bs-target="#forgot-password-modal"
+                                                        data-bs-dismiss="modal">Olvidaste tu contraseña ?</a></div>
+                                            </div>
+                                            <div class="d-grid my-4">
+                                                <button class="btn btn-primary" type="submit">Iniciar Sesion</button>
+                                        </form>
+                                        <!-- End EL FORM LOGING -->
+
+                                    </div>
+
+                                    <p class="text-2 text-center mb-0">Eres nuevo? <a href="" data-bs-toggle="modal"
+                                            data-bs-target="#register-modal" data-bs-dismiss="modal">Crear una
+                                            cuenta</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Login Form End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Login Modal End -->
+
+
+    <!-- Olvide contraseña modal -->
+
+    <div id="forgot-password-modal" class="modal fade oxyy-login-register" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+                <div class="modal-body p-0">
+                    <button type="button"
+                        class="btn-close btn-close-dark position-absolute top-0 end-0 m-2 me-sm-n4 mt-sm-n4"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="row g-0">
+
+                        <!-- Welcome Text (oculto en móvil y tablets) -->
+                        <div class="col-lg-5 d-none d-lg-block bg-primary rounded-start">
+                            <div class="row g-0 h-100">
+                                <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
+                                    <h3 class="text-white mt-5 mb-4">Recuperar contraseña</h3>
+                                    <p class="text-4 text-light lh-base mb-4">Aca podras recuperar tu contraseña atravez
+                                        de tu correo.</p>
+                                    <div class="mt-auto mb-4">
+                                        <img class="img-fluid w-100 w-sm-30 w-md-50"
+                                            src="/assets/img/icon/recoverIcon.png" alt="Oxyy">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Welcome Text End -->
+
+                        <!-- Forgot Form -->
+                        <div class="col-12 col-lg-7 d-flex align-items-center bg-white rounded-end">
+                            <div class="container my-auto py-5">
+                                <div class="row">
+                                    <div class="col-11 col-lg-10 mx-auto">
+                                        <h3 class="text-center text-6 mb-4">Olvidaste tu contraseña?</h3>
+                                        <p class="text-center text-muted">Ingresa tu email y actualiza tu contraseña.
+                                        </p>
+
+                                        <!-- Inicio form olvide -->
+
+                                        <form id="forgotForm" class="form-border"
+                                            action="../../controllers/users/enviarCorreo.php" method="POST">
+                                            <div class="mb-3">
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['datosVacioForgot'] ?? ''; ?>
+                                                </p>
+                                                <input type="email" class="form-control border-2"
+                                                    id="emailAddressForgot" name="correoOlvide" <?php echo 'value="' . ($old['correoOlvide'] ?? '') . '"'; ?> required
+                                                    placeholder="Ingresa tu correo electronico">
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['errorCorreoOlvide'] ?? ''; ?>
+                                                </p>
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['correoInexistenteForgot'] ?? ''; ?>
+                                                </p>
+                                            </div>
+                                            <div class="d-grid my-4">
+                                                <button class="btn btn-primary" type="submit">Enviar</button>
+                                            </div>
+                                        </form>
+
+
+                                        <!-- Inicio form olvide -->
+
+                                        <p class="text-2 text-center mb-0">
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
+                                                data-bs-dismiss="modal">Regresar</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Forgot Form End -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Forgot Modal End -->
+
+    <!-- Forgot Modal End -->
+
+
+    <!-- Register Modal
+    =========================== -->
+    <div id="register-modal" class="modal fade oxyy-login-register" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+                <div class="modal-body p-0">
+                    <button type="button"
+                        class="btn-close btn-close-dark position-absolute top-0 end-0 m-2 me-sm-n4 mt-sm-n4"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="row g-0">
+                        <!-- Welcome Text
+                ====================== -->
+                        <div class="col-lg-5 d-none d-lg-block bg-primary rounded-start">
+                            <div class="row g-0 h-100">
+                                <div class="col-10 col-lg-9 d-flex flex-column mx-auto">
+                                    <h3 class="text-white mt-5 mb-4">Registrate</h3>
+                                    <p class="text-4 text-light lh-base mb-4">Queremos conocerte, ingresa tu
+                                        informacion.</p>
+                                    <div class="mt-auto mb-4"><img class="img-fluid w-100 w-sm-40 w-md-50"
+                                        src="/assets\img\icon\registerIcon.png" alt="Oxyy">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Welcome Text End -->
+
+                        <!-- Register Form
+                ====================== -->
+                        <div class="col-lg-7 d-flex align-items-center bg-white rounded-end">
+                            <div class="container my-auto py-5">
+                                <div class="row">
+                                    <div class="col-11 col-lg-10 mx-auto">
+                                        <h3 class="text-center text-4 mb-4">Crear una cuenta</h3>
+                                        <div class="d-flex flex-column align-items-center mb-3">
+
+                                        </div>
+
+                                        <!-- Inicio form registro -->
+                                        <form id="signupForm" class="form-border"
+                                            action="../../controllers/users/registro.php" method="POST">
+
+                                            <p class="text-start text-danger"> <?php echo $error['datosVacio'] ?? ''; ?>
+                                            </p>
+
+                                            <div class="mb-3 ">
+                                                <!-- Mostrar error por nombre de usuario -->
+
+                                                <input type="text"
+                                                    class="form-control border-2 <?php echo isset($error['errorNombre']) ? 'is-invalid' : ''; ?>"
+                                                    id="fullNameRegistro" <?php echo 'value="' . ($old['nombreUsuario'] ?? '') . '"'; ?> name="nombreUsuario" required
+                                                    placeholder="Ingresa tu nombre">
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['errorNombre'] ?? ''; ?>
+                                                </p>
+                                            </div>
+
+
+                                            <div class="mb-3">
+                                                <!-- Mostrar error por correo -->
+
+                                                <input type="email"
+                                                    class="form-control border-2 <?php echo isset($error['errorCorreo']) ? 'is-invalid' : ''; ?> <?php echo isset($error['correoOcupado']) ? 'is-invalid' : ''; ?>"
+                                                    id="emailAddressRegistro" <?php echo 'value="' . ($old['correoUsuario'] ?? '') . '"'; ?> name="correoUsuario"
+                                                    required placeholder="Ingresa tu correo">
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['errorCorreo'] ?? ''; ?>
+                                                </p>
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['correoOcupado'] ?? ''; ?>
+                                                </p>
+                                            </div>
+
+
+                                            <div class="mb-3">
+                                                <!-- Mostrar error por telefono -->
+
+                                                <input type="text" inputmode="numeric" pattern="\d{10}"
+                                                    title="El telefono debe contener 10 digitos"
+                                                    class="form-control border-2 <?php echo isset($error['errorTelefono']) ? 'is-invalid' : ''; ?>"
+                                                    id="loginTelefonoRegistro" <?php echo 'value="' . ($old['telefonoUsuario'] ?? '') . '"'; ?> name="telefonoUsuario"
+                                                    required placeholder="Ingresa tu telefono">
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['errorTelefono'] ?? ''; ?>
+                                                </p>
+                                            </div>
+
+
+
+                                            <div class="mb-3">
+                                                <!-- Mostrar error por contraseña -->
+
+                                                <input type="password"
+                                                    class="form-control border-2 <?php echo isset($error['errorContraseña']) ? 'is-invalid' : ''; ?>"
+                                                    id="loginPasswordRegistro" <?php echo 'value="' . htmlspecialchars(string: ($old['contraseñaUsuario'] ?? '')) . '"'; ?> name="contraseñaUsuario" required
+                                                    placeholder="Ingresa tu contraseña">
+                                                <p class="text-start text-danger">
+                                                    <?php echo $error['errorContraseña'] ?? ''; ?>
+                                                </p>
+                                            </div>
+
+                                            <div class="d-grid my-4">
+                                                <button class="btn btn-primary" type="submit">Crear Cuenta</button>
+                                            </div>
+                                        </form>
+                                        <!--Fin form registro-->
+                                        <p class="text-2 text-center mb-0">Ya tienes una cuenta? <a href=""
+                                                data-bs-toggle="modal" data-bs-target="#login-modal"
+                                                data-bs-dismiss="modal">Inicia Sesion</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Register Form End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Register Modal End -->
+
+
+
 
     <!--<< All JS Plugins >>-->
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
