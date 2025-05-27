@@ -26,10 +26,7 @@ $numeroFilas =0;
     $mysql->desconectar();
   }
    else{
-      //  header("Location: ../../index.php");
-      //        exit();
-
-      echo "No isset";
+      $numeroFilas =0;
    }
   
 
