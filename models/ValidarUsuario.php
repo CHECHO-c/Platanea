@@ -14,7 +14,7 @@ class ValidarUsuario{
         require_once 'MySql.php';
         $mysql = new MySQL();
         $errores=[];
-
+        
         
         if(empty(trim($this->datos['nombreUsuario']?? '')) ||
             empty(trim($this->datos['correoUsuario']?? ''))||
