@@ -320,21 +320,25 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
                     </div>
                 </div>
             </div>
+
+
+
             <div class="swiper food-catagory-slider">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="catagory-product-card bg-cover"
                             style="background-image: url('assets/img/shape/catagory-card-shape.jpg');">
-                            <h5>$ 10.000</h5>
+                            <h5 id="precioProducto1">20.000</h5>
                             <div class="catagory-product-image text-center">
-                                <a href="shop.html">
-                                    <img src="assets/img/food/delicious-burger.png" alt="imagen-del-producto">
+                                <a>
+                                    <img id="imagenProducto1" src="assets/img/food/delicious-burger.png" alt="imagen-del-producto">
                                     <div class="decor-leaf">
                                         <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
                                     </div>
                                     <div class="decor-leaf-2">
                                         <img src="assets/img/shape/decor-leaf-2.svg" alt="imagen-decorativa">
                                     </div>
+                                    
                                   
                                 </a>
                             </div>
@@ -342,15 +346,19 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
                                 <div class="catagory-product-icon">
                                     <img src="assets/img/shape/food-shape.svg" alt="texto decorativo">
                                 </div>
-                                <h3><a href="shop-single.html">Pizza Artesanal</a></h3>
-                                <p>$ 10.000</p>
+                                <h3><a href="shop-single.html"></a>Platano</h3>
+                                <p>$ 20.000</p>
+                                <button class="btn btn-success" id="agregarProducto1">Agregar</button>
                             </div>
                         </div>
+                        
+                    
+                    
                     </div>
                     <div class="swiper-slide">
                         <div class="catagory-product-card bg-cover"
                             style="background-image: url('assets/img/shape/catagory-card-shape.jpg');">
-                            <h5>$ 10.000</h5>
+                            <h5 id="precioProducto2">5.000</h5>
                             <div class="catagory-product-image text-center">
                                 <a href="shop.html">
                                     <img src="assets/img/food/ruti.png" alt="imagen-del-producto">
@@ -365,10 +373,11 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
                             </div>
                             <div class="catagory-product-content text-center">
                                 <div class="catagory-product-icon">
-                                    <img src="assets/img/shape/food-shape.svg" alt="texto decorativo">
+                                    <img id="imagenProducto2" src="assets/img/shape/food-shape.svg" alt="texto decorativo">
                                 </div>
-                                <h3><a href="shop-single.html">Pasta Italiana</a></h3>
-                                <p>$ 10.000</p>
+                                <h3><a href="shop-single.html">Coca-cola</a></h3>
+                                <p>$5000</p>
+                                <button class="btn btn-success" id="agregarProducto2">Agregar</button>
                             </div>
                         </div>
                     </div>
@@ -988,6 +997,8 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
     <script src="assets/js/wow.min.js"></script>
     <!--<< Main.js >>-->
     <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/agregarCarrito.js"></script>
 
 
 

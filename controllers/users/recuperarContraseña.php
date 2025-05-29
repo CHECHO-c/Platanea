@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $errores["datosVacio"] = "Enviaste datos vacios";
             $_SESSION["old"] = $_POST;
             $_SESSION["error"] = $errores;
-            header("Location: ../../views/users/recuperarContraseña.php?".$cadena);
+            header("Location: ../../views/users/recuperarContraseña.php?$cadena");
             exit();
     }
 

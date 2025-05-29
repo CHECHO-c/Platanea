@@ -230,7 +230,7 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
 
 
     <!--<< Sección del Carrito de Productos Inicio >>-->
-    <section class="cart-section section-padding fix">
+    <section id="sectionCarrito" class="cart-section section-padding fix">
         <div class="container">
             <div class="main-cart-wrapper">
                 <div class="row">
@@ -251,31 +251,31 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
                                     <tbody>
                                         <tr class="cart-item">
                                             <td class="cart-item-info">
-                                                <img src="../../assets/img/food/ruti.png" alt="Imagen del producto"
+                                                <img id="imagenProducto" src="" alt="Imagen del producto"
                                                     class="img-fluid" style="max-width: 80px;">
                                             </td>
                                             <td class="cart-item-price">
-                                                $ <span class="base-price">195.00</span>
+                                                 $<span id="precioProducto" class="base-price"></span>
                                             </td>
                                             <td>
                                                 <div class="cart-item-quantity">
-                                                    <span class="cart-item-quantity-amount">0</span>
+                                                    <span id="cantidadProducto" class="cart-item-quantity-amount">1</span>
                                                     <div class="cart-item-quantity-controller">
                                                         <a href="#0" class="cart-increment">
-                                                            <i class="far fa-caret-up"></i>
+                                                            <i id="aumentar" class="far fa-caret-up"></i>
                                                         </a>
                                                         <a href="#0" class="cart-decrement">
-                                                            <i class="far fa-caret-down"></i>
+                                                            <i id="disminuir" class="far fa-caret-down"></i>
                                                         </a>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="cart-item-price">
-                                                $ <span class="total-price">0.00</span>
+                                                $ <span id="totalProducto" class="total-price"></span>
                                             </td>
                                             <td class="cart-item-remove">
                                                 <a href="#0">
-                                                    <i class="fas fa-times"></i>
+                                                    <i id="eliminarProducto" class="fas fa-times"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -292,12 +292,12 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
                                 <h4>Total del carrito</h4>
                                 <ul>
                                     <li>
-                                        <span>Subtotal</span>
-                                        <span>$320.00</span>
+                                        <span id="subTotal">Subtotal</span>
+                                        <span></span>
                                     </li>
                                     <li>
-                                        <span>Total</span>
-                                        <span>$320.00</span>
+                                        <span id="total">Total</span>
+                                        <span></span>
                                     </li>
                                 </ul>
                                 <div class="chck">
@@ -741,6 +741,8 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
     <script src="../../assets/js/wow.min.js"></script>
     <!--<< Main.js >>-->
     <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/cargarCarrito.js"></script>
+
 </body>
 
 </html>
