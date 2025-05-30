@@ -46,7 +46,7 @@ $numeroFilas =0;
         <!--<< Font Awesome.css >>-->
         <link rel="stylesheet" href="../../assets/css/font-awesome.css">
         <!--<< Animate.css >>-->
-        <link rel="stylesheet" href="..../assets//css/animate.css">
+        <link rel="stylesheet" href="../../assets/css/animate.css">
         <!--<< Magnific Popup.css >>-->
         <link rel="stylesheet" href="../../assets/css/magnific-popup.css">
         <!--<< MeanMenu.css >>-->
@@ -149,7 +149,7 @@ $numeroFilas =0;
 <?php endif; ?>
 
       <!--<< All JS Plugins >>-->
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../assets/js/jquery-3.7.1.min.js"></script>
+    
         <!--<< Viewport Js >>-->
         <script src="../../assets/js/viewport.jquery.js"></script> 
         <!--<< Bootstrap Js >>-->

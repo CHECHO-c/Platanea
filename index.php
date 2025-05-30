@@ -971,7 +971,7 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
                 icon: 'success'
             });
         </script>
-    <?php elseif ($contraseñaActualizada == "no"): ?>
+    <?php elseif ($contraseñaActualizada == "no"): ?>
         <script>
             Swal.fire({
                 title: 'Ocurrio un error al actualizar la contraseña',
@@ -986,7 +986,8 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
             Swal.fire({
                 title: 'Pedido enviado con exito',
                 text: 'Asegurate de mirar tu whatsapp para obtener una respuesta',
-                icon: 'success'
+                icon: 'success',
+                confirmButtonColor: '#28a745'
             });
         </script>
     <?php endif; ?>
@@ -1007,7 +1008,7 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
         </svg>
     </div>
     <!--<< All JS Plugins >>-->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <!--<< Viewport Js >>-->
     <script src="assets/js/viewport.jquery.js"></script>
