@@ -1,10 +1,49 @@
 <?php
-
 session_start();
-$nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+    $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+    $error = $_SESSION['error'] ?? [];
+    $old = $_SESSION['old'] ?? [];
+    $carroVacio = false;
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+
+    $accion = $_POST['accion'] ?? '';
+    $indice = $_POST['indice'] ?? null;
+    if (!isset($_SESSION['carrito'])) $_SESSION['carrito'] = [];
+    switch ($accion) {
+        case 'incrementar':
+            $_SESSION['carrito'][$indice]['cantidad']++;
+            break;
+        case 'decrementar':
+            $_SESSION['carrito'][$indice]['cantidad']--;
+            if ($_SESSION['carrito'][$indice]['cantidad'] < 1) {
+                unset($_SESSION['carrito'][$indice]);
+                $_SESSION['carrito'] = array_values($_SESSION['carrito']);
+            }
+            break;
+        case 'eliminar':
+            unset($_SESSION['carrito'][$indice]);
+            $_SESSION['carrito'] = array_values($_SESSION['carrito']);
+            break;
+        case 'actualizar':
+            $cantidad = isset($_POST['cantidad']) ? (int)$_POST['cantidad'] : 1;
+            if ($cantidad < 1) $cantidad = 1;
+            $_SESSION['carrito'][$indice]['cantidad'] = $cantidad;
+            break;
+    }
+    // Calcular total
+    $total = 0;
+    foreach ($_SESSION['carrito'] as $producto) {
+        $total += $producto['precio'] * $producto['cantidad'];
+    }
+    json_encode(['success' => true, 'carrito' => array_values($_SESSION['carrito']), 'total' => $total]);
+    exit;
+}
+     json_encode(['success' => false]);
 
 ?>
-
 
 
 
@@ -42,6 +81,8 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
     <!--<< Style.css >>-->
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="stylesheet" href="../../assets/css/loginForm.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/logo/logo_platanea.png">
@@ -200,7 +241,7 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
                         <div class="header-right d-flex align-items-center gap-3">
 
                            <?php if (!empty($nombreUsuario)): ?>
-                                <a class="text-success bg-red-2"><?php echo $nombreUsuario ?></a>
+                                <a class="text-success bg-red-2" id="nombreUsuario" data-nombre="<?php echo $nombreUsuario ?>"><?php echo $nombreUsuario ?></a>
                             <?php else: ?>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
                                     class="theme-btn bg-red-2">Iniciar Sesión</a>
@@ -238,7 +279,7 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
                     <div class="col-12 col-lg-8">
                         <div class="cart-wrapper">
                             <div class="cart-items-wrapper table-responsive">
-                                <table class="table">
+                                <table class="table" id="tablaProductos">
                                     <thead>
                                         <tr>
                                             <th>Producto</th>
@@ -249,36 +290,38 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="cart-item">
-                                            <td class="cart-item-info">
-                                                <img id="imagenProducto" src="" alt="Imagen del producto"
-                                                    class="img-fluid" style="max-width: 80px;">
-                                            </td>
-                                            <td class="cart-item-price">
-                                                 $<span id="precioProducto" class="base-price"></span>
-                                            </td>
-                                            <td>
-                                                <div class="cart-item-quantity">
-                                                    <span id="cantidadProducto" class="cart-item-quantity-amount">1</span>
-                                                    <div class="cart-item-quantity-controller">
-                                                        <a href="#0" class="cart-increment">
-                                                            <i id="aumentar" class="far fa-caret-up"></i>
-                                                        </a>
-                                                        <a href="#0" class="cart-decrement">
-                                                            <i id="disminuir" class="far fa-caret-down"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="cart-item-price">
-                                                $ <span id="totalProducto" class="total-price"></span>
-                                            </td>
-                                            <td class="cart-item-remove">
-                                                <a href="#0">
-                                                    <i id="eliminarProducto" class="fas fa-times"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+<?php 
+$total = 0;
+if (!empty($_SESSION['carrito'])): 
+    foreach ($_SESSION['carrito'] as $indice => $producto): 
+        $subtotal = $producto['precio'] * $producto['cantidad'];
+        $total += $subtotal;
+?>
+    <tr data-indice="<?php echo $indice; ?>">
+        <td data-valor="<?php echo htmlspecialchars($producto['nombre']); ?>">
+            <img src="<?php echo '../../' . htmlspecialchars($producto['imagen']); ?>" alt="Imagen del producto"  class="img-fluid" style="max-width: 80px;">
+            <span ><?php echo htmlspecialchars($producto['nombre']); ?></span>
+        </td>
+
+        <td>$<?php echo number_format($producto['precio'], 0, ',', '.'); ?></td>
+       
+        <td data-valor="<?php echo $producto['cantidad']; ?>">
+            <input   type="number" class="cantidad-input text-black" data-indice="<?php echo $indice; ?>" value="<?php echo $producto['cantidad']; ?>" min="1" style="width:60px;text-align:center;">
+        </td>
+
+
+
+        <td class="subtotal" data-valor="<?php echo number_format($subtotal, 0, ',', '.'); ?>">$<?php echo number_format($subtotal, 0, ',', '.'); ?></td>
+        <td>
+            <button class="btn-eliminar" data-indice="<?php echo $indice; ?>">Eliminar</button>
+        </td>
+    </tr>
+<?php 
+    endforeach; 
+else: ?>
+    <tr><td colspan="5" class="text-center">No hay productos en el carrito.</td></tr>
+    <?php $carroVacio = true; ?>
+<?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -292,19 +335,29 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
                                 <h4>Total del carrito</h4>
                                 <ul>
                                     <li>
-                                        <span id="subTotal">Subtotal</span>
-                                        <span></span>
+                                        <span id="subTotal">$<?php echo number_format($total, 0, ',', '.'); ?></span>
                                     </li>
                                     <li>
-                                        <span id="total">Total</span>
-                                        <span></span>
+                                        <span id="total" data-total="<?php echo number_format($total, 0, ',', '.'); ?>">$<?php echo number_format($total, 0, ',', '.'); ?></span>
                                     </li>
                                 </ul>
                                 <div class="chck">
-                                    <a href="#"
+                                    <?php if($carroVacio==true): ?>
+                                    
+                                    <?php elseif(isset($_SESSION["id"])): ?>
+                                        <a type="submit" id="realizarPedido" 
                                         class="theme-btn bg-red-2 border-radius-none d-flex justify-content-center">
                                         Realizar compra
                                     </a>
+                                    <?php else: ?>
+
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
+                                    class="theme-btn bg-red-2">Iniciar Sesión</a>
+
+                                    <?php endif; ?>
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -732,7 +785,7 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
     <!--<< MeanMenu Js >>-->
     <script src="../../assets/js/jquery.meanmenu.min.js"></script>
     <!--<< CountDown Js >>-->
-    <script src="../../assets/js/countdowncustom.js"></script>
+    
     <!--<< Magnific Popup Js >>-->
     <script src="../../assets/js/jquery.magnific-popup.min.js"></script>
     <!--<< GSAP Animation Js >>-->
@@ -741,8 +794,10 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
     <script src="../../assets/js/wow.min.js"></script>
     <!--<< Main.js >>-->
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/cargarCarrito.js"></script>
+    <script src="../../assets/js/realizarPedido.js"></script>
+    <script src="../../assets/js/carrito.js"></script>
 
 </body>
 
 </html>
+

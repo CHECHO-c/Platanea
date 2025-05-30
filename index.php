@@ -6,8 +6,9 @@ $old = $_SESSION['old'] ?? [];
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
 $correoEnviado = $_SESSION['correoEnviado'] ?? '';
 $contraseñaActualizada = $_SESSION["contraseñaActualizada"] ?? "";
+$pedidoEnviado = $_SESSION["pedidoEnviado"] ?? "";
 
-unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSION["contraseñaActualizada"]);
+unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSION["contraseñaActualizada"],$_SESSION["pedidoEnviado"]);
 
 ?>
 
@@ -348,7 +349,12 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
                                 </div>
                                 <h3><a href="shop-single.html"></a>Platano</h3>
                                 <p>$ 20.000</p>
-                                <button class="btn btn-success" id="agregarProducto1">Agregar</button>
+                                <button class="btn btn-success btn-agregar-producto mt-2" 
+                                        data-nombre="Platano" 
+                                        data-precio="20000" 
+                                        data-imagen="assets/img/food/delicious-burger.png">
+                                    <i class="fa fa-cart-plus"></i> Agregar
+                                </button>
                             </div>
                         </div>
                         
@@ -377,7 +383,12 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
                                 </div>
                                 <h3><a href="shop-single.html">Coca-cola</a></h3>
                                 <p>$5000</p>
-                                <button class="btn btn-success" id="agregarProducto2">Agregar</button>
+                                <button class="btn btn-success btn-agregar-producto mt-2" 
+                                        data-nombre="Coca-cola" 
+                                        data-precio="5000" 
+                                        data-imagen="assets/img/food/ruti.png">
+                                    <i class="fa fa-cart-plus"></i> Agregar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -403,6 +414,12 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
                                 </div>
                                 <h3><a href="shop-single.html">Hamburguesas</a></h3>
                                 <p>$ 10.000</p>
+                                <button class="btn btn-success btn-agregar-producto mt-2" 
+                                        data-nombre="Hamburguesas" 
+                                        data-precio="10000" 
+                                        data-imagen="assets/img/food/burger.png">
+                                    <i class="fa fa-cart-plus"></i> Agregar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -428,6 +445,12 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
                                 </div>
                                 <h3><a href="shop-single.html">Papas Fritas</a></h3>
                                 <p>$ 10.000</p>
+                                <button class="btn btn-success btn-agregar-producto mt-2" 
+                                        data-nombre="Papas Fritas" 
+                                        data-precio="10000" 
+                                        data-imagen="assets/img/food/french-fry.png">
+                                    <i class="fa fa-cart-plus"></i> Agregar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -657,6 +680,9 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
 
                                             <p class="text-start text-danger">
                                                 <?php echo $error['datosVacioLogin'] ?? ''; ?>
+                                            </p>
+                                            <p class="text-start text-danger">
+                                                <?php echo $error['noLogueado'] ?? ''; ?>
                                             </p>
                                             <div class="mb-3">
                                                 <input type="email"
@@ -955,6 +981,16 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
         </script>
     <?php endif; ?>
 
+    <?php if ($pedidoEnviado == "ok"): ?>
+        <script>
+            Swal.fire({
+                title: 'Pedido enviado con exito',
+                text: 'Asegurate de mirar tu whatsapp para obtener una respuesta',
+                icon: 'success'
+            });
+        </script>
+    <?php endif; ?>
+
 
 
 
@@ -998,10 +1034,19 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
     <!--<< Main.js >>-->
     <script src="assets/js/main.js"></script>
 
-    <script src="assets/js/agregarCarrito.js"></script>
+    
 
-
-
+    <!-- Toast de notificación -->
+    <div id="toastProductoAgregado" class="toast align-items-center text-bg-success border-0 position-fixed end-0 top-0 m-4" role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 9999; min-width: 200px; display:none;">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="fa fa-check-circle me-2"></i>Producto agregado
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    <!-- Fin Toast de notificación -->
+    <script src="assets/js/indexCarrito.js"></script>
 </body>
 
 </html>
