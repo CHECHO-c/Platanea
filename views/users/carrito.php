@@ -311,7 +311,7 @@ if (!empty($_SESSION['carrito'])):
 
 
 
-        <td class="subtotal" data-valor="<?php echo number_format($subtotal, 0, ',', '.'); ?>">$<?php echo number_format($subtotal, 0, ',', '.'); ?></td>
+        <td class="subtotal" data-valor="<?php echo number_format($subtotal, 0, ',', '.'); ?>" >$<?php echo number_format($subtotal, 0, ',', '.'); ?></td>
         <td>
             <button class="btn-eliminar" data-indice="<?php echo $indice; ?>">Eliminar</button>
         </td>

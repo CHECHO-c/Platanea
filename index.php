@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once './models/MySql.php';
 
 $error = $_SESSION['error'] ?? [];
 $old = $_SESSION['old'] ?? [];
@@ -9,6 +10,14 @@ $contraseñaActualizada = $_SESSION["contraseñaActualizada"] ?? "";
 $pedidoEnviado = $_SESSION["pedidoEnviado"] ?? "";
 
 unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSION["contraseñaActualizada"],$_SESSION["pedidoEnviado"]);
+
+$mysql = new Mysql();
+$mysql->conectar();
+$resultado = $mysql->ejecutarConsulta("SELECT * FROM producto");
+$mysql->desconectar();
+
+
+
 
 ?>
 
@@ -303,161 +312,101 @@ unset($_SESSION['error'], $_SESSION['old'], $_SESSION['correoEnviado'], $_SESSIO
 
 
     <!-- Food Catagory Section Start -->
-    <section id="comidas" class="food-category-section fix section-padding section-bg">
-      
-  
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7 col-9">
-                    <div class="section-title">
-                        <span class="wow fadeInUp">crujiente, sabor en cada bocado</span>
-                        <h2 class="wow fadeInUp" data-wow-delay=".3s">Comidas Populares</h2>
-                    </div>
-                </div>
-                <div class="col-md-5 ps-0 col-3 text-end wow fadeInUp" data-wow-delay=".5s">
-                    <div class="array-button">
-                        <button class="array-prev"><i class="far fa-long-arrow-left"></i></button>
-                        <button class="array-next"><i class="far fa-long-arrow-right"></i></button>
-                    </div>
+
+    <?php if(mysqli_num_rows($resultado)>0): ?>
+<section id="comidas" class="food-category-section fix section-padding section-bg">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-9">
+                <div class="section-title">
+                    <span class="wow fadeInUp">crujiente, sabor en cada bocado</span>
+                    <h2 class="wow fadeInUp" data-wow-delay=".3s">Comidas Populares</h2>
                 </div>
             </div>
+            <div class="col-md-5 ps-0 col-3 text-end wow fadeInUp" data-wow-delay=".5s">
+                <div class="array-button">
+                    <button class="array-prev" tabindex="0" aria-label="Previous slide"><i class="far fa-long-arrow-left"></i></button>
+                    <button class="array-next" tabindex="0" aria-label="Next slide"><i class="far fa-long-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
 
-
-
-            <div class="swiper food-catagory-slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="catagory-product-card bg-cover"
-                            style="background-image: url('assets/img/shape/catagory-card-shape.jpg');">
-                            <h5 id="precioProducto1">20.000</h5>
-                            <div class="catagory-product-image text-center">
-                                <a>
-                                    <img id="imagenProducto1" src="assets/img/food/delicious-burger.png" alt="imagen-del-producto">
-                                    <div class="decor-leaf">
-                                        <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
-                                    </div>
-                                    <div class="decor-leaf-2">
-                                        <img src="assets/img/shape/decor-leaf-2.svg" alt="imagen-decorativa">
-                                    </div>
-                                    
-                                  
-                                </a>
-                            </div>
-                            <div class="catagory-product-content text-center">
-                                <div class="catagory-product-icon">
-                                    <img src="assets/img/shape/food-shape.svg" alt="texto decorativo">
+        <!-- Estructura Swiper corregida -->
+        <div class="swiper food-catagory-slider swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+            <div class="swiper-wrapper" id="swiper-wrapper-products" aria-live="off">
+                
+                <?php while($productos=mysqli_fetch_assoc($resultado)): ?>
+                <div class="swiper-slide" role="group" style="width: 333px; margin-right: 30px;">
+                    <div class="catagory-product-card bg-cover" style="background-image: url('assets/img/shape/catagory-card-shape.jpg');">
+                        <h5 id="precioProducto1">$<?php echo number_format($productos["precio"],0,",",".")?></h5>
+                        <div class="catagory-product-image text-center">
+                            <a>
+                                <img id="imagenProducto1" src="<?php echo $productos["foto"] ?>" alt="<?php echo $productos["nombre"]; ?>">
+                                <div class="decor-leaf">
+                                    <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
                                 </div>
-                                <h3><a href="shop-single.html"></a>Platano</h3>
-                                <p>$ 20.000</p>
-                                <button class="btn btn-success btn-agregar-producto mt-2" 
-                                        data-nombre="Platano" 
-                                        data-precio="20000" 
-                                        data-imagen="assets/img/food/delicious-burger.png">
-                                    <i class="fa fa-cart-plus"></i> Agregar
-                                </button>
+                                <div class="decor-leaf-2">
+                                    <img src="assets/img/shape/decor-leaf-2.svg" alt="imagen-decorativa">
+                                </div>
+                                
+                            </a>
+                        </div>
+                        <div class="catagory-product-content text-center">
+                            <span class="spanMejores">Mejores comidas</span>
+                            <h3>
+                                <a href="shop-single.html">
+                                    <?php echo $productos["nombre"]; ?>
+                                </a>
+                            </h3>
+                            <p>$<?php echo number_format($productos["precio"],0,",",".")?></p>
+                            <button class="btn btn-success btn-agregar-producto mt-2" 
+                                    data-nombre="<?php echo $productos["nombre"]; ?>" 
+                                    data-precio="<?php echo $productos["precio"]; ?>" 
+                                    data-imagen="<?php echo $productos["foto"]; ?>">
+                                <i class="fa fa-cart-plus"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <?php endwhile; ?>
+                
+            </div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+        </div>
+    </div>
+</section>
+
+<?php else: ?>
+<div class="container-fluid bg-light py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div >
+                    <div class="card-body text-center py-5">
+                        <div class="mb-4">
+                            <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center" 
+                                 style="width: 100px; height: 100px;">
+                                <i class="fas fa-shopping-basket text-white fs-1"></i>
                             </div>
                         </div>
                         
-                    
-                    
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="catagory-product-card bg-cover"
-                            style="background-image: url('assets/img/shape/catagory-card-shape.jpg');">
-                            <h5 id="precioProducto2">5.000</h5>
-                            <div class="catagory-product-image text-center">
-                                <a href="shop.html">
-                                    <img src="assets/img/food/ruti.png" alt="imagen-del-producto">
-                                    <div class="decor-leaf">
-                                        <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
-                                    </div>
-                                    <div class="decor-leaf-2">
-                                        <img src="assets/img/shape/decor-leaf-2.svg" alt="imagen-decorativa">
-                                    </div>
-                                  
-                                </a>
-                            </div>
-                            <div class="catagory-product-content text-center">
-                                <div class="catagory-product-icon">
-                                    <img id="imagenProducto2" src="assets/img/shape/food-shape.svg" alt="texto decorativo">
-                                </div>
-                                <h3><a href="shop-single.html">Coca-cola</a></h3>
-                                <p>$5000</p>
-                                <button class="btn btn-success btn-agregar-producto mt-2" 
-                                        data-nombre="Coca-cola" 
-                                        data-precio="5000" 
-                                        data-imagen="assets/img/food/ruti.png">
-                                    <i class="fa fa-cart-plus"></i> Agregar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="catagory-product-card bg-cover"
-                            style="background-image: url('assets/img/shape/catagory-card-shape.jpg');">
-                            <h5>$ 10.000</h5>
-                            <div class="catagory-product-image text-center">
-                                <a href="shop.html">
-                                    <img src="assets/img/food/burger.png" alt="imagen-del-producto">
-                                    <div class="decor-leaf">
-                                        <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
-                                    </div>
-                                    <div class="decor-leaf-2">
-                                        <img src="assets/img/shape/decor-leaf-2.svg" alt="imagen-decorativa">
-                                    </div>
-                                  
-                                </a>
-                            </div>
-                            <div class="catagory-product-content text-center">
-                                <div class="catagory-product-icon">
-                                    <img src="assets/img/shape/food-shape.svg" alt="texto decorativo">
-                                </div>
-                                <h3><a href="shop-single.html">Hamburguesas</a></h3>
-                                <p>$ 10.000</p>
-                                <button class="btn btn-success btn-agregar-producto mt-2" 
-                                        data-nombre="Hamburguesas" 
-                                        data-precio="10000" 
-                                        data-imagen="assets/img/food/burger.png">
-                                    <i class="fa fa-cart-plus"></i> Agregar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="catagory-product-card bg-cover"
-                            style="background-image: url('assets/img/shape/catagory-card-shape.jpg');">
-                            <h5>$ 10.000</h5>
-                            <div class="catagory-product-image text-center">
-                                <a href="shop.html">
-                                    <img src="assets/img/food/french-fry.png" alt="imagen-del-producto">
-                                    <div class="decor-leaf">
-                                        <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
-                                    </div>
-                                    <div class="decor-leaf-2">
-                                        <img src="assets/img/shape/decor-leaf-2.svg" alt="imagen-decorativa">
-                                    </div>
-                                  
-                                </a>
-                            </div>
-                            <div class="catagory-product-content text-center">
-                                <div class="catagory-product-icon">
-                                    <img src="assets/img/shape/food-shape.svg" alt="texto decorativo">
-                                </div>
-                                <h3><a href="shop-single.html">Papas Fritas</a></h3>
-                                <p>$ 10.000</p>
-                                <button class="btn btn-success btn-agregar-producto mt-2" 
-                                        data-nombre="Papas Fritas" 
-                                        data-precio="10000" 
-                                        data-imagen="assets/img/food/french-fry.png">
-                                    <i class="fa fa-cart-plus"></i> Agregar
-                                </button>
-                            </div>
-                        </div>
+                        <h3 class="card-title text-dark fw-bold mb-3">
+                            No hay productos disponibles
+                        </h3>
+                        
+                        <p class="card-text text-muted mb-4 fs-6">
+                            En este momento no tenemos productos en esta categoría.<br>
+                            Te invitamos a explorar otras opciones o volver más tarde.
+                        </p>
+                        
+
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+<?php endif; ?>
 
 
 

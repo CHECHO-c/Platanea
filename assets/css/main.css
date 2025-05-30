@@ -101,6 +101,20 @@ Version: 2.0.0
   box-shadow: 0px 0px 52px 0px rgba(0, 22, 89, 0.17);
 }
 
+.spanMejores {
+  opacity: 0;
+  transition: all 0.3s ease;
+  font-size: 0;
+  text-transform: uppercase;
+}
+
+.catagory-product-card:hover .spanMejores {
+  opacity: 1;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: bold;
+}
+
 @media (max-width: 991px) {
   .theme-btn {
     padding: 16px 36px;
@@ -771,21 +785,18 @@ input.main-search-input::placeholder {
 @media (max-width: 1199px) {
   .section-padding {
     padding: 100px 0;
-  
   }
-  .bg-cover{
-        height: 60% !important;
+  .bg-cover {
+    height: 60% !important;
   }
-
 }
 @media (max-width: 991px) {
   .section-padding {
     padding: 80px 0;
-  
   }
 
-    .bg-cover{
-        height: 50% !important;
+  .bg-cover {
+    height: 50% !important;
   }
 }
 @media (min-width: 1199px) and (max-width: 1500px) {
@@ -3806,7 +3817,7 @@ input.main-search-input::placeholder {
   left: 40%;
   width: 53px;
   height: 2px;
-  background-color: var(--theme2);
+  background-color: transparent;
 }
 @media (max-width: 767px) {
   .catagory-product-card .catagory-product-content::before {

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
         try{
             $mysql->conectar();
 
-            $consulta = "INSERT INTO usuario (nombre,telefono,correo,contraseña ,foto,id_rol) VALUES ('$nombre','$telefono','$correo','$contraseñaCrypt',null,2)";
+            $consulta = "INSERT INTO usuario (nombre,telefono,correo,contraseña,foto,id_rol) VALUES ('$nombre','$telefono','$correo','$contraseñaCrypt',null,2)";
     
             $resultado = $mysql->ejecutarConsulta($consulta);
             
