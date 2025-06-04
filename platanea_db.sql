@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2025 a las 17:17:06
+-- Tiempo de generación: 04-06-2025 a las 22:46:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,7 +40,8 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `foto`) VALUES
-(31, 'Platano', 'platano con yuca', 99999999.99, 'vistas/imagenes/productos/producto_20250521_073445_575.png');
+(31, 'Platano', 'platano con yuca', 99999999.99, 'vistas/imagenes/productos/producto_20250521_073445_575.png'),
+(32, 'perro', '12345', 12313.00, 'vistas/imagenes/productos/producto_20250604_223133_833.png');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,7 @@ CREATE TABLE `usuario` (
   `telefono` varchar(12) NOT NULL,
   `correo` varchar(255) NOT NULL,
   `contraseña` varchar(100) NOT NULL,
-  `foto` text NOT NULL,
+  `foto` text DEFAULT NULL,
   `id_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -97,7 +98,9 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `telefono`, `correo`, `contraseña`, `foto`, `id_rol`) VALUES
 (39, 'loco 2', '123', '1231@gmail.com', '$2a$07$asxx54ahjppf45sd87a5auqv8viC6q3uIDcq7eWezJl6umabdUf3.', 'vistas/imagenes/usuarios/usuario_20250521_054622_337.png', 1),
 (43, 'user3', '3123123', '123@o.com', '$2a$07$asxx54ahjppf45sd87a5auGZEtGHuyZwm.Ur.FJvWLCql3nmsMbXy', 'vistas/imagenes/usuarios/usuario_20250521_065745_165.png', 1),
-(45, 'dada', '131231', 'lolo@gm', '$2a$07$asxx54ahjppf45sd87a5auLx6Ro9kq3KemWgdFULZmywz1uepQPsW', 'vistas/imagenes/usuarios/usuario_20250521_073513_934.png', 1);
+(45, 'dada', '131231', 'lolo@gm', '$2a$07$asxx54ahjppf45sd87a5auLx6Ro9kq3KemWgdFULZmywz1uepQPsW', 'vistas/imagenes/usuarios/usuario_20250521_073513_934.png', 1),
+(48, 'Sergio', '1234567890', 'baloncestoentablon@gmail.com', '$2a$07$asxx54ahjppf45sd87a5aumUskocpQucMnvwsUt.aC6WLWGcLNcY6', NULL, 2),
+(49, 'Sergio', '1234567890', 'mombo@gmail.com', '$2a$07$asxx54ahjppf45sd87a5aumUskocpQucMnvwsUt.aC6WLWGcLNcY6', NULL, 2);
 
 --
 -- Índices para tablas volcadas
@@ -136,7 +139,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `recuperacion`
@@ -154,7 +157,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Restricciones para tablas volcadas

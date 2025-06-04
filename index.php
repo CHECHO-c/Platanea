@@ -974,7 +974,7 @@ $mysql->desconectar();
     <!--<< MeanMenu Js >>-->
     <script src="assets/js/jquery.meanmenu.min.js"></script>
     <!--<< CountDown Js >>-->
-    <script src="assets/js/countdowncustom.js"></script>
+   
     <!--<< Magnific Popup Js >>-->
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
     <!--<< GSAP Animation Js >>-->
