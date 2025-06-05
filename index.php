@@ -343,7 +343,7 @@ $mysql->desconectar();
                         <h5 id="precioProducto1">$<?php echo number_format($productos["precio"],0,",",".")?></h5>
                         <div class="catagory-product-image text-center">
                             <a>
-                                <img id="imagenProducto1" src="<?php echo $productos["foto"] ?>" alt="<?php echo $productos["nombre"]; ?>">
+                                <img id="imagenProducto1" src="<?php echo "./admin/".$productos["foto"] ?>" alt="<?php echo $productos["nombre"]; ?>">
                                 <div class="decor-leaf">
                                     <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
                                 </div>
@@ -364,7 +364,7 @@ $mysql->desconectar();
                             <button class="btn btn-success btn-agregar-producto mt-2" 
                                     data-nombre="<?php echo $productos["nombre"]; ?>" 
                                     data-precio="<?php echo $productos["precio"]; ?>" 
-                                    data-imagen="<?php echo $productos["foto"]; ?>">
+                                    data-imagen="<?php echo "./admin/".$productos["foto"]; ?>">
                                 <i class="fa fa-cart-plus"></i> Agregar
                             </button>
                         </div>

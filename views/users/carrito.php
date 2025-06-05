@@ -343,7 +343,9 @@ else: ?>
                                 </ul>
                                 <div class="chck">
                                     <?php if($carroVacio==true): ?>
-                                    
+                                        <a href="../../index.php" 
+                                        class="theme-btn bg-red-2">Ver los productos</a>
+
                                     <?php elseif(isset($_SESSION["id"])): ?>
                                         <a type="submit" id="realizarPedido" 
                                         class="theme-btn bg-red-2 border-radius-none d-flex justify-content-center">
@@ -351,8 +353,8 @@ else: ?>
                                     </a>
                                     <?php else: ?>
 
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
-                                    class="theme-btn bg-red-2">Iniciar Sesión</a>
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"
+                                        class="theme-btn bg-red-2">Iniciar Sesión</a>
 
                                     <?php endif; ?>
 
