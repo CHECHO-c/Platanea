@@ -14,6 +14,19 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             header("Location: ../../index.php");
             exit();
     }
+
+
+    //Verificamos si es administrador
+    if($datosUsuario){
+        if($datosUsuario["id_rol"]==1){
+            $_SESSION["validarSession"] = "ok";
+            $_SESSION["idBackend"] = $datosUsuario["id_usuario"];
+
+
+            header("Location: ../../admin/usuarios");
+            exit();
+        }
+    }
     
     if($datosUsuario){
                 $_SESSION['id'] = $datosUsuario['id_usuario'];

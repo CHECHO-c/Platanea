@@ -23,6 +23,8 @@
 
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
+
+          <?php $admin["foto"]=empty($admin["foto"])?"vistas/imagenes/usuarios/usuario_vacio.png":$admin["foto"] ?>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src='<?php echo $admin["foto"] ?>' class="user-image" alt="User Image">
             <span class="hidden-xs"><?php echo $admin["nombre"] ?></span>

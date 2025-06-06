@@ -65,6 +65,7 @@
                                                 <td><?php echo $value["nombre"] ?></td>
                                                 <td class="emailType"><?php echo $value["correo"] ?></td>
                                                 <td><?php echo $value["telefono"] ?></td>
+                                                <?php $value["foto"]=empty($value["foto"])?"vistas/imagenes/usuarios/usuario_vacio.png":$value["foto"] ?>
                                                 <td><img src="<?php echo $value["foto"] ?>" width="40px" height="40px"></td>
                                                 <td> <?php echo $roles["nombre_rol"] ?> </td>
                                                 <td>
