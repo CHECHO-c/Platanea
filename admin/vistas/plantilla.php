@@ -98,6 +98,7 @@ else:
           $_GET["pagina"] == "usuarios" ||
           $_GET["pagina"] == "roles" ||
           $_GET["pagina"] == "productos" ||
+          $_GET["pagina"] == "pedidos" ||
           $_GET["pagina"] == "salir"
         ) {
 

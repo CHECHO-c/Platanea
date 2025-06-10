@@ -1,0 +1,54 @@
+/* Estilos personalizados para las cards de pedidos */
+.card-pedido {
+    border-radius: 12px;
+    border: 1.5px solid #28a745;
+    box-shadow: 0 2px 8px rgba(40,167,69,0.08);
+    transition: box-shadow 0.2s;
+    position: relative;
+}
+.card-pedido:hover {
+    box-shadow: 0 4px 16px rgba(40,167,69,0.18);
+}
+
+.card-pedido .btn-descartar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 2px 10px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    transition: background 0.2s;
+}
+.card-pedido .btn-descartar:hover {
+    background: #218838;
+    color: #fff;
+}
+
+.btn-descartar-responsive {
+    min-width: 90px;
+    padding: 4px 14px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    transition: background 0.2s;
+    box-shadow: 0 1px 4px rgba(40,167,69,0.08);
+    margin-left: auto;
+    display: block;
+}
+.btn-descartar-responsive:hover {
+    background: #218838;
+    color: #fff;
+}
+
+@media (max-width: 575.98px) {
+    .btn-descartar-responsive {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 8px;
+    }
+} 

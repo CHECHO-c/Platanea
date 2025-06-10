@@ -1,6 +1,7 @@
 <?php
 session_start();
     $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+    $idUsuario = $_SESSION['id'] ?? '';
     $error = $_SESSION['error'] ?? [];
     $old = $_SESSION['old'] ?? [];
     $carroVacio = false;
@@ -347,10 +348,15 @@ else: ?>
                                         class="theme-btn bg-red-2">Ver los productos</a>
 
                                     <?php elseif(isset($_SESSION["id"])): ?>
-                                        <a type="submit" id="realizarPedido" 
+
+                                        <form action="../../controllers/users/realizarPedido.php" method="POST">
+                                            <input type="hidden" name="id_usuario" value="<?php echo $idUsuario ?>">
+                                            <input type="hidden" name="total" value="<?php echo $total ?>">
+                                        <button type="submit" id="realizarPedido" 
                                         class="theme-btn bg-red-2 border-radius-none d-flex justify-content-center">
                                         Realizar compra
-                                    </a>
+                                    </button>
+                                    </form>
                                     <?php else: ?>
 
                                         <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"

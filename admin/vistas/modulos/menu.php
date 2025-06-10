@@ -37,6 +37,12 @@
         </a>
       </li>
 
+      <li>
+        <a href="pedidos">
+          <i class="fa fa-cube"></i> <span>Pedidos</span>
+        </a>
+      </li>
+
 
 
 
