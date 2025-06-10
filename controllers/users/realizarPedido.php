@@ -14,7 +14,7 @@ try {
     $mysql = new MySQL();
     $mysql->conectar();
     
-    $consulta = "INSERT INTO pedido (id_usuario, total, fecha, estado) VALUES ('$id_usuario', '$total', NOW(), 'pendiente')";
+    $consulta = "INSERT INTO pedido (id_usuario, total, fecha, estado) VALUES ('$id_usuario', '$total', NOW(), 'Pendiente')";
     $resultado = $mysql->ejecutarConsulta($consulta);
     
     header("Location: ../../index.php");
