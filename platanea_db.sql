@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2025 a las 18:58:13
+-- Tiempo de generación: 11-06-2025 a las 00:10:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `fecha` varchar(200) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `total` decimal(10,0) NOT NULL,
+  `id_usuarioPedido` int(11) DEFAULT NULL,
+  `total` varchar(100) NOT NULL,
   `estado` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -39,10 +39,14 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `fecha`, `id_usuario`, `total`, `estado`) VALUES
-(1, '5/06/2025', 51, 2000, 'Activo\r\n'),
-(4, '2025-06-10 11:49:09', 52, 20000, 'pendiente'),
-(5, '2025-06-10 11:52:35', 52, 20000, 'pendiente');
+INSERT INTO `pedido` (`id_pedido`, `fecha`, `id_usuarioPedido`, `total`, `estado`) VALUES
+(10, '2025-06-10 15:48:28', 52, '10000', 'finalizado'),
+(11, '2025-06-10 15:54:12', 52, '20000', 'Finalizado'),
+(12, '2025-06-10 16:26:33', 52, '30000', 'Cancelado'),
+(13, '2025-06-10 16:29:48', 52, '10.000', 'Cancelado'),
+(14, '2025-06-10 16:30:50', 52, '10.000', 'Cancelado'),
+(15, '2025-06-10 16:31:16', 52, '30.000', 'Cancelado'),
+(16, '2025-06-10 16:51:48', 52, '150000', 'Pendiente');
 
 -- --------------------------------------------------------
 
@@ -131,7 +135,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `telefono`, `correo`, `contraseña`, `foto`, `id_rol`) VALUES
-(51, 'Sergio', '3227186015', 'balon@gmail.com', '$2a$07$asxx54ahjppf45sd87a5auGZEtGHuyZwm.Ur.FJvWLCql3nmsMbXy', NULL, 1),
+(51, 'Sergio', '3227186015', 'balona@gmail.com', '$2a$07$asxx54ahjppf45sd87a5auGZEtGHuyZwm.Ur.FJvWLCql3nmsMbXy', '', 1),
 (52, 'Sergio', '1234567890', 'baloncestoentablon@gmail.com', '$2a$07$asxx54ahjppf45sd87a5aumUskocpQucMnvwsUt.aC6WLWGcLNcY6', NULL, 2);
 
 --
@@ -143,7 +147,7 @@ INSERT INTO `usuario` (`id_usuario`, `nombre`, `telefono`, `correo`, `contraseñ
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`id_pedido`),
-  ADD KEY `id_usuario` (`id_usuario`);
+  ADD KEY `id_usuario` (`id_usuarioPedido`);
 
 --
 -- Indices de la tabla `pedido_producto`
@@ -185,7 +189,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -219,7 +223,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_usuarioPedido`) REFERENCES `usuario` (`id_usuario`);
 
 --
 -- Filtros para la tabla `pedido_producto`
