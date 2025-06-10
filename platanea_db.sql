@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2025 a las 23:16:29
+-- Tiempo de generación: 10-06-2025 a las 18:58:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -24,6 +24,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pedido`
+--
+
+CREATE TABLE `pedido` (
+  `id_pedido` int(11) NOT NULL,
+  `fecha` varchar(200) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `total` decimal(10,0) NOT NULL,
+  `estado` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id_pedido`, `fecha`, `id_usuario`, `total`, `estado`) VALUES
+(1, '5/06/2025', 51, 2000, 'Activo\r\n'),
+(4, '2025-06-10 11:49:09', 52, 20000, 'pendiente'),
+(5, '2025-06-10 11:52:35', 52, 20000, 'pendiente');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedido_producto`
+--
+
+CREATE TABLE `pedido_producto` (
+  `id_pedido` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `producto`
 --
 
@@ -40,8 +75,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `foto`) VALUES
-(31, 'Platano', 'platano con yuca', 99999999.99, 'vistas/imagenes/productos/producto_20250521_073445_575.png'),
-(32, 'perro', '12345', 12313.00, 'vistas/imagenes/productos/producto_20250604_223133_833.png');
+(33, 'Platano con queso', 'Rico', 200000.00, 'vistas/imagenes/productos/producto_20250610_185030_607.jpg'),
+(34, 'Cocacola', 'Deli', 20000.00, 'vistas/imagenes/productos/producto_20250610_185347_730.jpg'),
+(36, 'Pepsi', '', 10000.00, 'vistas/imagenes/productos/producto_20250610_185606_478.png');
 
 -- --------------------------------------------------------
 
@@ -71,9 +107,8 @@ CREATE TABLE `rol` (
 --
 
 INSERT INTO `rol` (`id_rol`, `nombre_rol`) VALUES
-(1, 'Administrador'),
-(2, 'Cliente'),
-(6, 'Loca');
+(1, 'admin'),
+(2, 'usuario');
 
 -- --------------------------------------------------------
 
@@ -96,16 +131,26 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `telefono`, `correo`, `contraseña`, `foto`, `id_rol`) VALUES
-(39, 'loco 2', '123', '1231@gmail.com', '$2a$07$asxx54ahjppf45sd87a5auqv8viC6q3uIDcq7eWezJl6umabdUf3.', 'vistas/imagenes/usuarios/usuario_20250521_054622_337.png', 1),
-(43, 'user3', '3123123', 'admin@gmail.com', '$2a$07$asxx54ahjppf45sd87a5auGZEtGHuyZwm.Ur.FJvWLCql3nmsMbXy', 'vistas/imagenes/usuarios/usuario_20250521_065745_165.png', 1),
-(45, 'dada', '131231', 'lolo@gm', '$2a$07$asxx54ahjppf45sd87a5auLx6Ro9kq3KemWgdFULZmywz1uepQPsW', 'vistas/imagenes/usuarios/usuario_20250521_073513_934.png', 1),
-(48, 'Sergio', '1234567890', 'baloncestoentablon@gmail.com', '$2a$07$asxx54ahjppf45sd87a5aumUskocpQucMnvwsUt.aC6WLWGcLNcY6', NULL, 2),
-(49, 'Sergio', '1234567890', 'mombo@gmail.com', '$2a$07$asxx54ahjppf45sd87a5aumUskocpQucMnvwsUt.aC6WLWGcLNcY6', NULL, 2),
-(50, 'Sergio', '3227186105', 'baloncestoentablona@gmail.com', '$2a$07$asxx54ahjppf45sd87a5auGZEtGHuyZwm.Ur.FJvWLCql3nmsMbXy', '', 1);
+(51, 'Sergio', '3227186015', 'balon@gmail.com', '$2a$07$asxx54ahjppf45sd87a5auGZEtGHuyZwm.Ur.FJvWLCql3nmsMbXy', NULL, 1),
+(52, 'Sergio', '1234567890', 'baloncestoentablon@gmail.com', '$2a$07$asxx54ahjppf45sd87a5aumUskocpQucMnvwsUt.aC6WLWGcLNcY6', NULL, 2);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD PRIMARY KEY (`id_pedido`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `pedido_producto`
+--
+ALTER TABLE `pedido_producto`
+  ADD PRIMARY KEY (`id_pedido`,`id_producto`),
+  ADD KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `producto`
@@ -137,10 +182,16 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `recuperacion`
@@ -158,11 +209,24 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+
+--
+-- Filtros para la tabla `pedido_producto`
+--
+ALTER TABLE `pedido_producto`
+  ADD CONSTRAINT `pedido_producto_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pedido_producto_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`
