@@ -196,12 +196,12 @@ Modal Editar usuarios
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
 
-                <div class="form-group has-feedback" bis_skin_checked="1">
+                <!-- <div class="form-group has-feedback" bis_skin_checked="1">
                     <input type="hidden" id="pass_userActual" name="pass_userActual">
                     <input type="password" class="form-control" id="pass_userE" name="pass_userE"
                         placeholder="contraseña">
                     <span class="glyphicon glyphicon-eye-close form-control-feedback"></span>
-                </div>
+                </div> -->
 
                 <div class="form-group has-feedback" bis_skin_checked="1">
                     <input type="text" class="form-control" id="telefonoE" name="telefonoE" placeholder="teléfono">

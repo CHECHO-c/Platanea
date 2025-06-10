@@ -24,11 +24,11 @@ class mdlUsuarios
   public static function mdlEditarUsuarios($tabla, $datos)
   {
 
-    $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombreE,  contraseña = :passwordE, telefono = :telefonoE, correo =  :correoE, foto = :fotoE, id_rol = :rolesE WHERE id_usuario = :idE");
+    $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombreE,  telefono = :telefonoE, correo =  :correoE, foto = :fotoE, id_rol = :rolesE WHERE id_usuario = :idE");
 
     $stmt->bindParam(":idE", $datos["idE"], PDO::PARAM_INT);
     $stmt->bindParam(":nombreE", $datos["nom_usuario"], PDO::PARAM_STR);
-    $stmt->bindParam(":passwordE", $datos["pass_user"], PDO::PARAM_STR);
+    
     $stmt->bindParam(":telefonoE", $datos["telefono"], PDO::PARAM_STR);
     $stmt->bindParam(":correoE", $datos["correo"], PDO::PARAM_STR);
     $stmt->bindParam(":fotoE", $datos["foto"], PDO::PARAM_STR);
