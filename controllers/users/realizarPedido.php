@@ -14,7 +14,7 @@ try {
     $mysql = new MySQL();
     $mysql->conectar();
     
-    $consulta = "INSERT INTO pedido (id_usuario, total, fecha, estado) VALUES ('$id_usuario', '$total', NOW(), 'Pendiente')";
+    $consulta = "INSERT INTO pedido (id_usuarioPedido, total, fecha, estado) VALUES ('$id_usuario', '$total', NOW(), 'Pendiente')";
     $resultado = $mysql->ejecutarConsulta($consulta);
     
     header("Location: ../../index.php");
@@ -24,5 +24,6 @@ try {
     exit();
 } catch (Exception $e) {
     header("Location: ../../index.php");
+    
 }
 ?> 

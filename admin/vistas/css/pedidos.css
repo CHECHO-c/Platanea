@@ -40,6 +40,21 @@
     margin-left: auto;
     display: block;
 }
+
+
+.btn-cancelar-responsive {
+    min-width: 90px;
+    padding: 4px 14px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    background: #cb1111;
+    color: #fff;
+    border: none;
+    transition: background 0.2s;
+    box-shadow: 0 1px 4px rgba(40,167,69,0.08);
+    margin-left: auto;
+    display: block;
+}
 .btn-descartar-responsive:hover {
     background: #218838;
     color: #fff;

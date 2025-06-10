@@ -10,6 +10,13 @@ if (isset($_POST['descartar_pedido_id'])) {
     exit();
 }
 
+if (isset($_POST['cancelar_pedidoId'])) {
+    ctrPedidos::ctrCancelarPedido($_POST['cancelar_pedidoId']);
+    // Redirigir para evitar reenvío de formulario
+    echo '<script>window.location = "pedidos";</script>';
+    exit();
+}
+
 $pedidos = ctrPedidos::ctrMostrarPedidos();
 ?>
 <link rel="stylesheet" href="vistas/css/pedidos.css">
@@ -44,14 +51,18 @@ $pedidos = ctrPedidos::ctrMostrarPedidos();
                                             <li class="list-group-item"><strong>Nombre_Cliente:</strong> <?php echo $pedido["nombre"]; ?></li>
                                             <li class="list-group-item"><strong>Fecha:</strong> <?php echo $pedido["fecha"]; ?></li>
                                             <li class="list-group-item"><strong>Total:</strong> $<?php echo $pedido["total"]; ?></li>
-                                            <li class="list-group-item"><strong>Estado:</strong> $<?php echo $pedido["estado"]; ?></li>
+                                            <li class="list-group-item"><strong>Estado:</strong> <?php echo $pedido["estado"]; ?></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="card-footer bg-transparent border-0 d-flex justify-content-end">
                                     <form method="post" style="margin-bottom:0;">
                                         <input type="hidden" name="descartar_pedido_id" value="<?php echo $pedido['id_pedido']; ?>">
-                                        <button type="submit" class="btn btn-success btn-sm btn-descartar-responsive">Descartar</button>
+                                        <button type="submit" class="btn btn-success btn-sm btn-descartar-responsive">Finalizar</button>
+                                    </form>
+                                    <form method="post" style="margin-bottom:0;">
+                                        <input type="hidden" name="cancelar_pedidoId" value="<?php echo $pedido['id_pedido']; ?>">
+                                        <button type="submit" class="btn btn-danger btn-sm btn-cancelar-responsive">Cancelar</button>
                                     </form>
                                 </div>
                             </div>

@@ -340,8 +340,10 @@ else: ?>
                                     </li>
                                     <li>
                                         <span id="total" data-total="<?php echo number_format($total, 0, ',', '.'); ?>">$<?php echo number_format($total, 0, ',', '.'); ?></span>
+                                            
                                     </li>
                                 </ul>
+                                
                                 <div class="chck">
                                     <?php if($carroVacio==true): ?>
                                         <a href="../../index.php" 
@@ -350,8 +352,10 @@ else: ?>
                                     <?php elseif(isset($_SESSION["id"])): ?>
 
                                         <form action="../../controllers/users/realizarPedido.php" method="POST">
+
+                                       
                                             <input type="hidden" name="id_usuario" value="<?php echo $idUsuario ?>">
-                                            <input type="hidden" name="total" value="<?php echo $total ?>">
+                                            <input type="hidden" id="totalParaEnviar" name="total" value="<?php echo $total ?>" >
                                         <button type="submit" id="realizarPedido" 
                                         class="theme-btn bg-red-2 border-radius-none d-flex justify-content-center">
                                         Realizar compra

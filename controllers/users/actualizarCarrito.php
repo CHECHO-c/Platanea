@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $total = 0;
     foreach ($_SESSION['carrito'] as $producto) {
         $total += $producto['precio'] * $producto['cantidad'];
+        $_SESSION["totalEpico"] = $total;
     }
 
     // Responder con JSON
