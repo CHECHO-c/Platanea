@@ -27,8 +27,7 @@ document.querySelectorAll('.cantidad-input').forEach(input => {
                 });
                 document.getElementById('subTotal').textContent = '$' + Number(data.total).toLocaleString('es-CO');
                 document.getElementById('total').textContent = '$' + Number(data.total).toLocaleString('es-CO');
-                document.getElementById('totalParaEnviar').value = ""
-                document.getElementById('totalParaEnviar').value = + Number(data.total)
+         
 
             }
         });

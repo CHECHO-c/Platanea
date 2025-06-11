@@ -351,16 +351,15 @@ else: ?>
 
                                     <?php elseif(isset($_SESSION["id"])): ?>
 
-                                        <form action="../../controllers/users/realizarPedido.php" method="POST">
+                
 
                                        
-                                            <input type="hidden" name="id_usuario" value="<?php echo $idUsuario ?>">
-                                            <input type="hidden" id="totalParaEnviar" name="total" value="<?php echo $total ?>" >
+                                        <input type="hidden" name="id_usuario" id="idUsuario" value="<?php echo $idUsuario ?>">
                                         <button type="submit" id="realizarPedido" 
                                         class="theme-btn bg-red-2 border-radius-none d-flex justify-content-center">
                                         Realizar compra
                                     </button>
-                                    </form>
+                                    
                                     <?php else: ?>
 
                                         <a href="" data-bs-toggle="modal" data-bs-target="#login-modal"

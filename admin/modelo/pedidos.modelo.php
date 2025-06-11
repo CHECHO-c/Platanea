@@ -5,7 +5,7 @@ class mdlPedidos
 {
     public static function mdlMostrarPedidos($tabla)
     {
-        $stmt = Conexion::conectar()->prepare("SELECT id_pedido,usuario.nombre,fecha,total,estado FROM pedido
+        $stmt = Conexion::conectar()->prepare("SELECT id_pedido,usuario.nombre,usuario.telefono,fecha,total,estado,lista FROM pedido
         JOIN usuario ON usuario.id_usuario=id_usuarioPedido where estado='Pendiente'");
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);

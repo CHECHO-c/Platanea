@@ -81,12 +81,18 @@ btnPedido.addEventListener("click",()=>{
         
     });
   })
-    
+  let id = document.querySelector("#idUsuario").value
   let nombre = document.querySelector("#nombreUsuario").dataset.nombre;
   let total = document.querySelector("#total").dataset.total;
   let mensaje = `Hola mi nombre es ${nombre} quiero solicitar los siguientes productos \n\n${lista} \n*TOTAL* \n${total} COP `;
   let url = `https://wa.me/573226479250?text=${encodeURIComponent(mensaje)}`;
    
+  let datosUsuario ={
+    idUsuario:id,
+    nombreUsuario:nombre,
+    totalCompra:total,
+    listaCompra:lista
+  }
             
 
             fetch("../../controllers/vaciarCarrito.php")
@@ -102,6 +108,20 @@ btnPedido.addEventListener("click",()=>{
             setTimeout(() => {
             window.location.href = "../../index.php";
             }, 1000);
+
+            fetch("../../controllers/users/realizarPedido.php",{
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify(datosUsuario)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Respuesta:', data);
+                
+            })
+            .catch(error => console.error('Error:', error));
       
 
   window.open(url,"_blank");

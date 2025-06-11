@@ -50,9 +50,13 @@ $pedidos = ctrPedidos::ctrMostrarPedidos();
                                         <ul class="list-group list-group-flush mb-3">
                                             <li class="list-group-item"><strong>Nombre_Cliente:</strong> <?php echo $pedido["nombre"]; ?></li>
                                             <li class="list-group-item"><strong>Fecha:</strong> <?php echo $pedido["fecha"]; ?></li>
+                                            <li class="list-group-item"><strong>Telefono:</strong> <?php echo $pedido["telefono"]; ?></li>
+                                            <li class="list-group-item"><strong>Lista</strong> <?php echo $pedido["lista"]; ?></li>
                                             <li class="list-group-item"><strong>Total:</strong> $<?php echo $pedido["total"]; ?></li>
                                             <li class="list-group-item"><strong>Estado:</strong> <?php echo $pedido["estado"]; ?></li>
                                         </ul>
+
+                                        
                                     </div>
                                 </div>
                                 <div class="card-footer bg-transparent border-0 d-flex justify-content-end">

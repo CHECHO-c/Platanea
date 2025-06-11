@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2025 a las 00:10:31
+-- Tiempo de generación: 11-06-2025 a las 10:48:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -32,21 +32,16 @@ CREATE TABLE `pedido` (
   `fecha` varchar(200) DEFAULT NULL,
   `id_usuarioPedido` int(11) DEFAULT NULL,
   `total` varchar(100) NOT NULL,
-  `estado` varchar(200) NOT NULL
+  `estado` varchar(200) NOT NULL,
+  `lista` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `fecha`, `id_usuarioPedido`, `total`, `estado`) VALUES
-(10, '2025-06-10 15:48:28', 52, '10000', 'finalizado'),
-(11, '2025-06-10 15:54:12', 52, '20000', 'Finalizado'),
-(12, '2025-06-10 16:26:33', 52, '30000', 'Cancelado'),
-(13, '2025-06-10 16:29:48', 52, '10.000', 'Cancelado'),
-(14, '2025-06-10 16:30:50', 52, '10.000', 'Cancelado'),
-(15, '2025-06-10 16:31:16', 52, '30.000', 'Cancelado'),
-(16, '2025-06-10 16:51:48', 52, '150000', 'Pendiente');
+INSERT INTO `pedido` (`id_pedido`, `fecha`, `id_usuarioPedido`, `total`, `estado`, `lista`) VALUES
+(30, '2025-06-11 03:37:54', 52, '110.000', 'Pendiente', 'Producto: Cocacola X 5\nSubtotal: 100.000\n\nProducto: Pepsi X 1\nSubtotal: 10.000\n\n');
 
 -- --------------------------------------------------------
 
@@ -189,7 +184,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -223,14 +218,14 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_usuarioPedido`) REFERENCES `usuario` (`id_usuario`);
+  ADD CONSTRAINT `fk_pedido_usuario` FOREIGN KEY (`id_usuarioPedido`) REFERENCES `usuario` (`id_usuario`);
 
 --
 -- Filtros para la tabla `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
-  ADD CONSTRAINT `pedido_producto_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`) ON DELETE CASCADE,
-  ADD CONSTRAINT `pedido_producto_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_pedido_producto_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_pedido_producto_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`
