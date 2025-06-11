@@ -1,5 +1,6 @@
 const btnPedido = document.querySelector("#realizarPedido");
 let lista  ="";
+let listaPedido ="";
 
 document.querySelectorAll('.cantidad-input').forEach(input => {
     input.addEventListener('change', function () {
@@ -54,6 +55,7 @@ btnPedido.addEventListener("click",()=>{
     let celda = fila.querySelectorAll("td");
         let i = 0;
         let sobrenombre = "";
+        let sobrenombrePedido = "";
         let saltoN ="";
     celda.forEach(dato => {
         
@@ -66,6 +68,7 @@ btnPedido.addEventListener("click",()=>{
                 saltoN ="\n\n";
             }
              if(i==1){
+                sobrenombrePedido ="X"
                 sobrenombre=" X ";
                 saltoN ="\n";
             }
@@ -75,7 +78,10 @@ btnPedido.addEventListener("click",()=>{
             }
 
              lista += sobrenombre + dato.dataset.valor + saltoN;
-
+             if(i!=2){
+                listaPedido += sobrenombrePedido + " " + " "+ dato.dataset.valor + "\n" ;
+             }
+             
              i++;
         }
         
@@ -91,7 +97,7 @@ btnPedido.addEventListener("click",()=>{
     idUsuario:id,
     nombreUsuario:nombre,
     totalCompra:total,
-    listaCompra:lista
+    listaCompra:listaPedido
   }
             
 
