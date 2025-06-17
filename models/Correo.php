@@ -70,7 +70,7 @@ class Correo {
         $link = "http://localhost:3000/views/users/recuperarContraseña.php?codigo=" .$codigo ."&correo=". urlencode($correoDestino);
         $destinatario = $correoDestino;
         $asunto = "Recuperacion de contrasena";
-        $mensaje = "Apreciado usuario en el siguiente link podra recuperar su plataseña <br> <a href= '". $link. "'>Recuperar Contraseña</a>" ;
+        $mensaje = "Apreciado usuario en el siguiente link podra recuperar su contraseña <br> <a href= '". $link. "'>Recuperar Contraseña</a>" ;
         $nombre = "Usuario";
 
        if ( $this->enviar($destinatario,$nombre,$asunto,$mensaje)){

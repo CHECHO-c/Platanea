@@ -178,7 +178,7 @@ $mysql->desconectar();
                             <li class="d-flex align-items-center">
                                 <div class="offcanvas__contact-icon"><i class="far fa-phone"></i></div>
                                 <div class="offcanvas__contact-text">
-                                    <a href="tel:+50680000000">+506 8000-0000</a>
+                                    <a href="https://wa.me/573042161832?text=Hola, quiero saber mas sobre platanea">304 2161832</a>
                                 </div>
                             </li>
                         </ul>
@@ -343,7 +343,7 @@ $mysql->desconectar();
                         <h5 id="precioProducto1">$<?php echo number_format($productos["precio"],0,",",".")?></h5>
                         <div class="catagory-product-image text-center">
                             <a>
-                                <img id="imagenProducto1" src="<?php echo "./admin/".$productos["foto"] ?>" alt="<?php echo $productos["nombre"]; ?>">
+                                <img id="imagenProducto1" src="<?php echo "./admin/".$productos["foto"] ?>"  alt="<?php echo $productos["nombre"]; ?>">
                                 <div class="decor-leaf">
                                     <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
                                 </div>

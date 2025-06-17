@@ -48,7 +48,7 @@ $pedidos = ctrPedidos::ctrMostrarPedidos();
                                     </div>
                                     <div class="card-body pb-2">
                                         <ul class="list-group list-group-flush mb-3">
-                                            <li class="list-group-item"><strong>Nombre_Cliente:</strong> <?php echo $pedido["nombre"]; ?></li>
+                                            <li class="list-group-item"><strong>Cliente:</strong> <?php echo $pedido["nombre"]; ?></li>
                                             <li class="list-group-item"><strong>Fecha:</strong> <?php echo $pedido["fecha"]; ?></li>
                                             <li class="list-group-item"><strong>Telefono:</strong> <?php echo $pedido["telefono"]; ?></li>
                                             <li class="list-group-item"><strong>Lista</strong> <?php echo $pedido["lista"]; ?></li>

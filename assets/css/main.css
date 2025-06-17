@@ -3994,9 +3994,6 @@ input.main-search-input::placeholder {
   border-radius: 3px;
   color: var(--header);
 }
-.catagory-product-card-2 .catagory-product-content .info-price h6 {
-  color: var(--theme2);
-}
 .catagory-product-card-2 .catagory-product-content .info-price span {
   font-size: 16px;
   font-weight: 600;
@@ -7300,7 +7297,11 @@ input.main-search-input::placeholder {
   margin-top: 30px;
   position: relative;
 }
-.main-sidebar .single-sidebar-widget .range__barcustom .price-input .field {
+.main-sidebar
+  .single-sidebar-widget
+  .range__barcustom
+  .price-input
+  .field {
   display: flex;
   align-items: center;
   font-size: 18px;
@@ -10373,12 +10374,7 @@ input.main-search-input::placeholder {
   }
 }
 .testimonial-wrapper-2 .testimonial-content .client-info {
-  margin-bottom: 30px;
-}
-@media (max-width: 575px) {
-  .testimonial-wrapper-2 .testimonial-content .client-info {
-    margin-bottom: 15px;
-  }
+  margin-bottom: 15px;
 }
 .testimonial-wrapper-2 .testimonial-content .client-info h4 {
   font-size: 29px;
@@ -13102,4 +13098,57 @@ p.sticky-label {
   .text-effect
   .effect-1 {
   top: -100%;
+}
+.catagory-product-card .catagory-product-image img {
+  width: 100%;
+  height: 60vh;
+  max-height: 300px;
+  min-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  background: #fff;
+}
+
+.catagory-product-card:hover .catagory-product-image img {
+  transform: scale(1.05);
+}
+
+/* Responsive para diferentes tamaños de pantalla */
+@media (max-width: 1200px) {
+  .catagory-product-card .catagory-product-image img {
+    height: 50vh;
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 991px) {
+  .catagory-product-card .catagory-product-image img {
+    height: 45vh;
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 767px) {
+  .catagory-product-card .catagory-product-image img {
+    height: 40vh;
+    max-height: 200px;
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 575px) {
+  .catagory-product-card .catagory-product-image img {
+    height: 35vh;
+    max-height: 180px;
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .catagory-product-card .catagory-product-image img {
+    height: 30vh;
+    max-height: 160px;
+    min-height: 80px;
+  }
 }
