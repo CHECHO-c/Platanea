@@ -72,6 +72,8 @@ $mysql->desconectar();
     <link rel="stylesheet" href="assets/css/main.css">
     <!--<< Iniciar Sesion.css >>-->
     <link rel="stylesheet" href="assets/css/loginForm.css">
+    <!--<< Productos.css >>-->
+    <link rel="stylesheet" href="assets/css/productos.css">
 
 
 
@@ -315,8 +317,6 @@ $mysql->desconectar();
 
     <?php if(mysqli_num_rows($resultado)>0): ?>
 <section id="comidas" class="food-category-section fix section-padding section-bg">
-
-
     <div class="container">
         <div class="row">
             <div class="col-md-7 col-9">
@@ -325,55 +325,37 @@ $mysql->desconectar();
                     <h2 class="wow fadeInUp" data-wow-delay=".3s">Comidas Populares</h2>
                 </div>
             </div>
-            <div class="col-md-5 ps-0 col-3 text-end wow fadeInUp" data-wow-delay=".5s">
-                <div class="array-button">
-                    <button class="array-prev" tabindex="0" aria-label="Previous slide"><i class="far fa-long-arrow-left"></i></button>
-                    <button class="array-next" tabindex="0" aria-label="Next slide"><i class="far fa-long-arrow-right"></i></button>
-                </div>
-            </div>
         </div>
 
-        <!-- Estructura Swiper corregida -->
-        <div class="swiper food-catagory-slider swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
-            <div class="swiper-wrapper" id="swiper-wrapper-products" aria-live="off">
-                
-                <?php while($productos=mysqli_fetch_assoc($resultado)): ?>
-                <div class="swiper-slide" role="group" style="width: 333px; margin-right: 30px;">
-                    <div class="catagory-product-card bg-cover" style="background-image: url('assets/img/shape/catagory-card-shape.jpg');">
-                        <h5 id="precioProducto1">$<?php echo number_format($productos["precio"],0,",",".")?></h5>
-                        <div class="catagory-product-image text-center">
-                            <a>
-                                <img id="imagenProducto1" src="<?php echo "./admin/".$productos["foto"] ?>"  alt="<?php echo $productos["nombre"]; ?>">
-                                <div class="decor-leaf">
-                                    <img src="assets/img/shape/decor-leaf.svg" alt="imagen-decorativa">
-                                </div>
-                                <div class="decor-leaf-2">
-                                    <img src="assets/img/shape/decor-leaf-2.svg" alt="imagen-decorativa">
-                                </div>
-                                
-                            </a>
+        <!-- Grid de productos con cards de Bootstrap -->
+        <div class="row" id="productos-grid">
+            <?php while($productos=mysqli_fetch_assoc($resultado)): ?>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+                <div class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden">
+                    <div class="position-relative">
+                        <img src="<?php echo "./admin/".$productos["foto"] ?>" 
+                             class="card-img-top" 
+                             alt="<?php echo $productos["nombre"]; ?>"
+                             style="height: 200px; object-fit: cover;">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-success fs-6">$<?php echo number_format($productos["precio"],0,",",".")?></span>
                         </div>
-                        <div class="catagory-product-content text-center">
-                            <span class="spanMejores">Mejores comidas</span>
-                            <h3>
-                                <a href="shop-single.html">
-                                    <?php echo $productos["nombre"]; ?>
-                                </a>
-                            </h3>
-                            <p>$<?php echo number_format($productos["precio"],0,",",".")?></p>
-                            <button class="btn btn-success btn-agregar-producto mt-2" 
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold text-dark mb-2"><?php echo $productos["nombre"]; ?></h5>
+                        <p class="card-text text-muted mb-3">Delicioso plátano frito con el mejor sabor</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-success w-100 btn-agregar-producto" 
                                     data-nombre="<?php echo $productos["nombre"]; ?>" 
                                     data-precio="<?php echo $productos["precio"]; ?>" 
                                     data-imagen="<?php echo "./admin/".$productos["foto"]; ?>">
-                                <i class="fa fa-cart-plus"></i> Agregar
+                                <i class="fa fa-cart-plus me-2"></i>Agregar al carrito
                             </button>
                         </div>
                     </div>
                 </div>
-                <?php endwhile; ?>
-                
             </div>
-            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            <?php endwhile; ?>
         </div>
     </div>
 </section>

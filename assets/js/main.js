@@ -290,39 +290,7 @@
         );
 
         //>> Food Catagory Slider Start <<//
-        const foodCatagorySlider = new Swiper(".food-catagory-slider", {
-            spaceBetween: 30,
-            speed: 800,
-            loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: ".array-prev",
-                prevEl: ".array-next",
-            },
-            breakpoints: {
-                1399: {
-                    slidesPerView: 4,
-                },
-                1199: {
-                    slidesPerView: 3,
-                },
-                991: {
-                    slidesPerView: 3,
-                },
-                767: {
-                    slidesPerView: 2,
-                },
-                575: {
-                    slidesPerView: 1,
-                },
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-        });
+        // Swiper eliminado - ahora se usa grid de cards
 
         //>> Food Catagory Slider Start <<//
          const brandSlider = new Swiper(".brand-slider", {
